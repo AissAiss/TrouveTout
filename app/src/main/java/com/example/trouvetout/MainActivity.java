@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 replaceCurrentFragmentBy(fragment_Fav);
             }
+
         });
 
         button_Home.setOnClickListener(new View.OnClickListener() {
