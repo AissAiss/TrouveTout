@@ -15,7 +15,7 @@
 
     <View
         android:layout_width="00dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
 
         android:background="@drawable/top_shadow_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
