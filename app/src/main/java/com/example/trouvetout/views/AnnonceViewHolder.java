@@ -1,6 +1,5 @@
 package com.example.trouvetout.views;
 
-import android.os.Debug;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,11 +9,13 @@ import com.example.trouvetout.R;
 
 public class AnnonceViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView nameTxt;
+    public TextView nameTxt, dscrptTct;
 
     public AnnonceViewHolder(View itemView) {
         super(itemView);
 
-        nameTxt=(TextView) itemView.findViewById(R.id.fragment_main_item_title);
+
+        nameTxt=(TextView) itemView.findViewById(R.id.title_annonce_card);
+        dscrptTct = (TextView) itemView.findViewById(R.id.description_annonce_card);
     }
 }

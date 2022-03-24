@@ -22,11 +22,11 @@
         <entry key="app/src/main/res/font/avenir.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1809674132843621" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3038949275362319" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3038949275362319" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20322292473346718" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/main_menu_item_layout.xml" value="0.21979166666666666" />
+        <entry key="app/src/main/res/layout/main_menu_item_layout.xml" value="0.254500126211245" />
         <entry key="app/src/main/res/layout/mainbackground.xml" value="0.3532608695652174" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2359375" />
       </map>
