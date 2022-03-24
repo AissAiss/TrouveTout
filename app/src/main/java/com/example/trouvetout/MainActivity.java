@@ -2,6 +2,7 @@ package com.example.trouvetout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         MDATABASE = FirebaseDatabase.getInstance("https://trouvetout-133fb-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
@@ -102,9 +105,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Write a message to the database
 
-                FirebaseHelper helper = new FirebaseHelper(MDATABASE);
+                /*FirebaseHelper helper = new FirebaseHelper(MDATABASE);
                 Annonce annonce = new Annonce("maison", "photo.png", "descpription", "position");
-                helper.save(annonce);
+                helper.save(annonce);*/
+                changeIconFromNavBar("user");
 
                 replaceCurrentFragmentBy(fragment_User);
             }
@@ -127,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.favLayout).setBackground(null);
         findViewById(R.id.messageLayout).setBackground(null);
         findViewById(R.id.shopLayout).setBackground(null);
+        findViewById(R.id.btnUser).setBackground(null);
+
 
 
 
@@ -164,6 +170,14 @@ public class MainActivity extends AppCompatActivity {
                 Animation animation4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutShop.startAnimation(animation4);
                 break;
+            case "user":
+                removeIcon();
+                ImageButton imageButton = findViewById(R.id.btnUser);
+                imageButton.setImageResource(R.drawable.ic_profile_fill);
+                findViewById(R.id.btnUser).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
+                Animation animation5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
+                button_User.startAnimation(animation5);
+
 
         }
 
@@ -174,5 +188,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnFav).setBackgroundResource(R.drawable.ic_heart);
         findViewById(R.id.btnMessage).setBackgroundResource(R.drawable.ic_message);
         findViewById(R.id.btnShop).setBackgroundResource(R.drawable.ic_shopping_cart);
+        ImageButton imageButton =  findViewById(R.id.btnUser);
+        imageButton.setImageResource(R.drawable.ic_profile);
+
     }
 }
