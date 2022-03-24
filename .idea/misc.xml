@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/user_icon_bg.xml" value="0.165" />
         <entry key="app/src/main/res/font-v26/avenir.xml" value="0.25" />
         <entry key="app/src/main/res/font/avenir.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-v28/main_menu_item_layout.xml" value="0.556390977443609" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1809674132843621" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20322292473346718" />
