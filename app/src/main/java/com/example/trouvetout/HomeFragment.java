@@ -2,11 +2,26 @@ package com.example.trouvetout;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.trouvetout.Helper.FirebaseHelper;
+import com.example.trouvetout.adapter.AnnoncesAdapter;
+import com.example.trouvetout.models.Annonce;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +38,16 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+
+    private AnnoncesAdapter annoncesAdapter;
+    FirebaseHelper helper;
+    AnnoncesAdapter adapter;
+    RecyclerView rv;
+
+
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,12 +78,45 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_home, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        rv = view.findViewById(R.id.rv_home);
+        setupRecyclerView();
+        return view;
+    }
+
+    private void setupRecyclerView() {
+        Query query = MainActivity.MDATABASE.getDatabase().getReference("Annonces");
+        FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                .setQuery(query, Annonce.class)
+                .build();
+        adapter = new AnnoncesAdapter(options);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+        rv.setAdapter(adapter);
+    }
+
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override public void onStart() {
+        super.onStart();
+        if (adapter != null) {
+            adapter.startListening();
+        }
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override public void onStop() {
+        super.onStop();if (adapter != null) {
+            adapter.stopListening();
+        }
     }
 }

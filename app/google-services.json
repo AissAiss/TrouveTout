@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "450718960443",
+    "firebase_url": "https://trouvetout-133fb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "trouvetout-133fb",
+    "storage_bucket": "trouvetout-133fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450718960443:android:64a96aa4d70c0b25a4851e",
+        "android_client_info": {
+          "package_name": "com.example.trouvetout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450718960443-v95t8boltmjcbojbm91r0d2g79b87a89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEVWfvytCyGFc6fgazP0d4-Z4w3uW0nZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450718960443-v95t8boltmjcbojbm91r0d2g79b87a89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
