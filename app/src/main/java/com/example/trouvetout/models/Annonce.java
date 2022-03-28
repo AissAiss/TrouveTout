@@ -4,6 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Annonce {
+    private String id;
     private String nom;
     private String photo;
     private String descpription;
@@ -13,7 +14,8 @@ public class Annonce {
 
     }
 
-    public Annonce(String nom, String photo, String descpription, String position) {
+    public Annonce(String id, String nom, String photo, String descpription, String position) {
+        this.id = id;
         this.nom = nom;
         this.photo = photo;
         this.descpription = descpription;
@@ -50,6 +52,14 @@ public class Annonce {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

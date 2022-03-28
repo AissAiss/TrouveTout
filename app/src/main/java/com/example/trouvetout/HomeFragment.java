@@ -96,8 +96,10 @@ public class HomeFragment extends Fragment {
         Query query = MainActivity.MDATABASE.getDatabase().getReference("Annonces");
         FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
                 .setQuery(query, Annonce.class)
+
                 .build();
         adapter = new AnnoncesAdapter(options);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);

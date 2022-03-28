@@ -22,6 +22,7 @@ import java.util.List;
 
 public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceViewHolder> {
 
+
     public AnnoncesAdapter(@NonNull FirebaseRecyclerOptions<Annonce> options) {
         super(options);
     }
@@ -30,6 +31,8 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
     protected void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position, @NonNull Annonce model) {
         holder.nameTxt.setText(model.getNom());
         holder.dscrptTct.setText(model.getDescpription());
+        holder.pos.setText(model.getPosition());
+        holder.id = this.getRef(position).getKey();
     }
 
     @NonNull
@@ -39,6 +42,8 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
                 viewGroup, false);
         return new AnnonceViewHolder(v);
     }
+
+
 
 
 }

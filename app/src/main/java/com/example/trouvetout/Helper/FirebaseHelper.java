@@ -54,7 +54,6 @@ public class FirebaseHelper {
             Annonce annonce = ds.getValue(Annonce.class);
             annonces.add(annonce);
         }
-        Log.i("test", String.valueOf(annonces));
     }
 
     //READ
