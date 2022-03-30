@@ -3,6 +3,7 @@ package com.example.trouvetout.views;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
 
 
     public TextView nameTxt, dscrptTct, pos;
+    public ImageView imageView;
     public String id;
 
     public AnnonceViewHolder(View itemView) {
@@ -27,6 +29,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
         nameTxt=(TextView) itemView.findViewById(R.id.title_annonce_card);
         dscrptTct = (TextView) itemView.findViewById(R.id.description_annonce_card);
         pos =  (TextView) itemView.findViewById(R.id.position_annonce_card);
+        imageView = (ImageView) itemView.findViewById(R.id.appercu_imageView);
         id = "no";
 
         itemView.setTag(this);
@@ -34,9 +37,6 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 Toast.makeText(itemView.getContext(), id+"coucou", Toast.LENGTH_SHORT).show();
-
-
-
 
 
 

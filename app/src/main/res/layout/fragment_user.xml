@@ -23,49 +23,48 @@
         app:layout_constraintVertical_bias="0.093" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="128dp"
         android:ems="10"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="84dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
-        android:textColor="@color/bleuFonce"
         android:inputType="textPassword"
+        android:textColor="@color/bleuFonce"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/ConnexionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="126dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="144dp"
         android:text="Connexion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="121dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="140dp"
         android:text="inscription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/ConnexionButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

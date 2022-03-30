@@ -1,32 +1,31 @@
 package com.example.trouvetout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.trouvetout.Helper.FirebaseHelper;
-import com.example.trouvetout.models.Annonce;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
 
     public static DatabaseReference MDATABASE;
+    public static FirebaseStorage STORAGE;
+    public static FirebaseAuth MAUTH;
+
+
 
     // Les 5 fragments de l'applications
     private Fragment fragment_Fav;
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment fragment_Message;
     private Fragment fragment_Shop;
     private Fragment fragment_User;
+    private Fragment fragment_Profile;
 
     // Les 5 boutons de l'application
     private LinearLayout linearLayoutFav;
@@ -49,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
         MDATABASE = FirebaseDatabase.getInstance("https://trouvetout-133fb-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        STORAGE = FirebaseStorage.getInstance("gs://trouvetout-133fb.appspot.com");
+        MAUTH = FirebaseAuth.getInstance();
+
+
 
 
         fragment_Fav        = new FavFragment();
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         fragment_Message    = new MessageFragment();
         fragment_Shop       = new ShopFragment();
         fragment_User       = new UserFragment();
+        fragment_Profile    = new MyProfileFragment();
+
 
         linearLayoutHome     = findViewById(R.id.homeLayout);
         linearLayoutFav      = findViewById(R.id.favLayout);
@@ -103,14 +108,21 @@ public class MainActivity extends AppCompatActivity {
         button_User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Write a message to the database
-
                 /*FirebaseHelper helper = new FirebaseHelper(MDATABASE);
                 Annonce annonce = new Annonce("maison", "photo.png", "descpription", "position");
                 helper.save(annonce);*/
-                changeIconFromNavBar("user");
 
-                replaceCurrentFragmentBy(fragment_User);
+
+                changeIconFromNavBar("user");
+                FirebaseUser currentUser = MAUTH.getCurrentUser();
+                if (currentUser != null){
+                    replaceCurrentFragmentBy(fragment_Profile);
+
+                }else{
+                    replaceCurrentFragmentBy(fragment_User);
+
+                }
+
             }
         });
     }
@@ -191,5 +203,16 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButton =  findViewById(R.id.btnUser);
         imageButton.setImageResource(R.drawable.ic_profile);
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

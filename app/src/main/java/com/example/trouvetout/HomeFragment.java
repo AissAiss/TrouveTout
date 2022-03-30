@@ -1,5 +1,8 @@
 package com.example.trouvetout;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +21,15 @@ import com.example.trouvetout.adapter.AnnoncesAdapter;
 import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.ByteArrayInputStream;
 
 /**
  * A simple {@link Fragment} subclass.
