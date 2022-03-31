@@ -1,8 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TrouveTout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <item name="android:textViewStyle">@font/avenir</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/black</item>
@@ -17,16 +15,6 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
 
-        <item name="android:editTextStyle">@style/editTextStyle</item>
 
-
-    </style>
-
-    <style name="editTextStyle" parent="@style/Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/bleuFonce</item>
-        <item name="android:background">@color/cardview_dark_background</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
     </style>
 </resources>

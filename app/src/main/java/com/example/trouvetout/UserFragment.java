@@ -73,32 +73,38 @@ public class UserFragment extends Fragment {
                 String email = editTextemail.getText().toString();
                 String pswd = editTextpswd.getText().toString();
 
+                Log.i("value truc", email+ ";");
 
-                MainActivity.MAUTH.signInWithEmailAndPassword(email,pswd)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("TAG", "signInWithEmail:success");
-                                    Fragment fragment = new MyProfileFragment();
-                                    Context context = view.getContext();
-                                    FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.fragment, fragment);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("TAG", "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(view.getContext(), "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
+                if(!email.equals("") && !pswd.equals("")) {
+
+
+                    MainActivity.MAUTH.signInWithEmailAndPassword(email, pswd)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("TAG", "signInWithEmail:success");
+                                        Fragment fragment = new MyProfileFragment();
+                                        Context context = view.getContext();
+                                        FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                        fragmentTransaction.replace(R.id.fragment, fragment);
+                                        fragmentTransaction.addToBackStack(null);
+                                        fragmentTransaction.commit();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(view.getContext(), "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
+
 
 
 
