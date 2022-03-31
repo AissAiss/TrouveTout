@@ -40,7 +40,6 @@ public class DetailsAnnonceFragment extends Fragment {
      * @param id id
      * @return A new instance of fragment DetailsAnnonceFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static DetailsAnnonceFragment newInstance(String id) {
         DetailsAnnonceFragment fragment = new DetailsAnnonceFragment();
         Bundle args = new Bundle();
@@ -61,7 +60,16 @@ public class DetailsAnnonceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_details_annonce, container, false);
+        initFragmentWithAnnonce(view, id);
 
+        // Inflate the layout for this fragment
+        return view;
+
+
+    }
+
+
+    private void initFragmentWithAnnonce(View view, String id){
         MainActivity.MDATABASE.child("Annonces").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -73,20 +81,11 @@ public class DetailsAnnonceFragment extends Fragment {
                     TextView title = view.findViewById(R.id.titleDetailsAnnonce);
                     TextView desc = view.findViewById(R.id.descpt_details_annonce);
 
-
-
                     Annonce annonce = task.getResult().getValue(Annonce.class);
                     title.setText(annonce.getNom());
                     desc.setText(annonce.getDescpription());
-
                 }
             }
         });
-
-
-        // Inflate the layout for this fragment
-        return view;
-
-
     }
 }
