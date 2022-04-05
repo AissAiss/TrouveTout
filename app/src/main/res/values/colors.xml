@@ -11,5 +11,6 @@
 
     <color name="bleuClair">#FFA1C7F4</color>
     <color name="bleuFonce">#FF2660A4</color>
+    <color name="colorPrimary">#F44336</color>
 
 </resources>

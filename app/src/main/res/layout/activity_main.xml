@@ -35,8 +35,8 @@
     <ImageButton
         android:id="@+id/btnUser"
 
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:adjustViewBounds="false"
@@ -46,7 +46,8 @@
         android:scaleY="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile" />
+        app:srcCompat="@drawable/ic_profile"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 
@@ -64,19 +65,22 @@
             app:layout_constraintStart_toStartOf="parent">
 
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
             <LinearLayout
                 android:id="@+id/homeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/icon_background"
                 android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/btnHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_home_2_fill"
+                    android:background="@drawable/ic_home_2"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
@@ -86,15 +90,19 @@
                     android:layout_gravity="center"
                     android:clickable="false"
                     android:paddingStart="5dp"
-                    android:text="Home"
+                    android:singleLine="true"
                     android:textColor="@color/bleuFonce" />
             </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/favLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp">
 
                 <ImageView
@@ -111,17 +119,21 @@
                     android:layout_gravity="center"
                     android:clickable="false"
                     android:paddingStart="5dp"
-                    android:text="Favoris"
-                    android:textColor="@color/bleuFonce"
-                    android:visibility="invisible" />
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/bleuFonce" />
             </LinearLayout>
 
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/messageLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp">
 
 
@@ -139,17 +151,21 @@
                     android:layout_gravity="center"
                     android:clickable="false"
                     android:paddingStart="5dp"
-                    android:text="Chat"
+                    android:text=""
                     android:textColor="@color/bleuFonce"
-                    android:visibility="invisible" />
+                    android:singleLine="true" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/shopLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp">
 
                 <ImageView
@@ -166,9 +182,14 @@
                     android:layout_gravity="center"
                     android:clickable="false"
                     android:paddingStart="5dp"
-                    android:text="Panier"
+                    android:text=""
                     android:textColor="@color/bleuFonce"
-                    android:visibility="invisible" />
+                    android:singleLine="true" />
             </LinearLayout>
-    </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

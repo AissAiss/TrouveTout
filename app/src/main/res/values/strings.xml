@@ -2,4 +2,8 @@
     <string name="app_name">TrouveTout</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_menu_message">Chat</string>
+    <string name="title_menu_shop">Panier</string>
+    <string name="title_menu_favori">Favoris</string>
+    <string name="title_menu_home">Home</string>
 </resources>
