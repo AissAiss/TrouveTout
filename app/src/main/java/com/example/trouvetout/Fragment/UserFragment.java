@@ -1,4 +1,4 @@
-package com.example.trouvetout;
+package com.example.trouvetout.Fragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.trouvetout.MainActivity;
+import com.example.trouvetout.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;

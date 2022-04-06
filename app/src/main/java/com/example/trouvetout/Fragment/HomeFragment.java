@@ -1,4 +1,4 @@
-package com.example.trouvetout;
+package com.example.trouvetout.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.trouvetout.Helper.FirebaseHelper;
+import com.example.trouvetout.MainActivity;
+import com.example.trouvetout.R;
 import com.example.trouvetout.adapter.AnnoncesAdapter;
 import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

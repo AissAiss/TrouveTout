@@ -1,7 +1,6 @@
 package com.example.trouvetout.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trouvetout.DetailsAnnonceFragment;
+import com.example.trouvetout.Fragment.DetailsAnnonceFragment;
 import com.example.trouvetout.R;
 
 public class AnnonceViewHolder extends RecyclerView.ViewHolder{

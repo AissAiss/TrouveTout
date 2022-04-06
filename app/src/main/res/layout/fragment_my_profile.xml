@@ -4,15 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfileFragment">
+    tools:context=".Fragment.MyProfileFragment">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="@color/bleuClair"
+        android:textFontWeight="900"
+        android:background="@drawable/custom_button"
+        android:padding="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+
+
+
         android:id="@+id/buttonsignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginBottom="72dp"
-        android:text="déconnexion"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Déconnexion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -24,4 +35,37 @@
         android:layout_marginTop="72dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="194dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/avenir_black"
+        android:text="Mes annonces : "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="@color/bleuClair"
+        android:textFontWeight="900"
+        android:background="@drawable/custom_button"
+        android:padding="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+
+
+        android:id="@+id/buttonAddAnnonce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginBottom="13dp"
+        android:text="Ajouter une annonce "
+        app:layout_constraintBottom_toTopOf="@+id/buttonsignOut"
+
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

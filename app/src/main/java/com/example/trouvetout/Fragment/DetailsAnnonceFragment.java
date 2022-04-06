@@ -1,4 +1,4 @@
-package com.example.trouvetout;
+package com.example.trouvetout.Fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.trouvetout.MainActivity;
+import com.example.trouvetout.R;
 import com.example.trouvetout.models.Annonce;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
