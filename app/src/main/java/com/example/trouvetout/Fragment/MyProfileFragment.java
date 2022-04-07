@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 //import com.firebase.ui.auth.AuthUI;
+import com.example.trouvetout.AddAnnonceActivity;
+import com.example.trouvetout.R;
 import com.firebase.ui.auth.AuthUI;
 
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -2,11 +2,14 @@ package com.example.trouvetout.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IgnoreExtraProperties
 public class Annonce {
     private String id;
     private String nom;
-    private String photo;
+    private ArrayList<String> photo;
     private String descpription;
     private String position;
 
@@ -14,7 +17,7 @@ public class Annonce {
 
     }
 
-    public Annonce(String id, String nom, String photo, String descpription, String position) {
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position) {
         this.id = id;
         this.nom = nom;
         this.photo = photo;
@@ -30,11 +33,11 @@ public class Annonce {
         this.nom = nom;
     }
 
-    public String getPhoto() {
+    public ArrayList<String> getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(ArrayList<String> photo) {
         this.photo = photo;
     }
 

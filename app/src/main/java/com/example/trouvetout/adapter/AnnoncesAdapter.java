@@ -39,7 +39,7 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
         holder.dscrptTct.setText(model.getDescpription());
         holder.pos.setText(model.getPosition());
         holder.id = this.getRef(position).getKey();
-        dlImageFromFireBaseStoarage(holder, model.getPhoto());
+        dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
     }
 
     @NonNull
@@ -51,7 +51,7 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
     }
 
     private void dlImageFromFireBaseStoarage(AnnonceViewHolder holder, String url){
-        StorageReference imageRef = MainActivity.STORAGE.getReference().child("default-image.jpeg");
+        StorageReference imageRef = MainActivity.STORAGE.getReference().child(url);
         final Bitmap[] img = new Bitmap[1];
         final long ONE_MEGABYTE = 1024 * 1024;
         imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {

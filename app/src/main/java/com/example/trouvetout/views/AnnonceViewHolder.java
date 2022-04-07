@@ -35,11 +35,6 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(itemView.getContext(), id+"coucou", Toast.LENGTH_SHORT).show();
-
-
-
-
                 Fragment fragment =  DetailsAnnonceFragment.newInstance(id);
                 Context context = itemView.getContext();
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
