@@ -11,16 +11,22 @@
         <entry key="app/src/main/res/drawable/custom_ic_lock.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/custom_ic_sms.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/fav_button.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.4041666666666667" />
+        <entry key="app/src/main/res/drawable/ic_heartFav.xml" value="0.4041666666666667" />
+        <entry key="app/src/main/res/drawable/ic_heart_fav.xml" value="0.4041666666666667" />
+        <entry key="app/src/main/res/drawable/ic_heart_fav_fill.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_home_2.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_location.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_lock_focused.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/drawable/ic_message.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_message_fill.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart.xml" value="0.34152871296000126" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_fill.xml" value="0.14874972777008694" />
+        <entry key="app/src/main/res/drawable/ic_sms.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/drawable/ic_sms_focused.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/icon_background.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/main_bg.xml" value="0.40520833333333334" />
@@ -29,18 +35,18 @@
         <entry key="app/src/main/res/font-v26/avenir.xml" value="0.25" />
         <entry key="app/src/main/res/font/avenir.xml" value="0.25" />
         <entry key="app/src/main/res/layout-v28/fragment_user.xml" value="0.21979166666666666" />
-        <entry key="app/src/main/res/layout-v28/main_menu_item_layout.xml" value="0.556390977443609" />
+        <entry key="app/src/main/res/layout-v28/main_menu_item_layout.xml" value="0.41710296684118675" />
         <entry key="app/src/main/res/layout/activity_add_annonce.xml" value="0.22913861467144103" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.7977861509426422" />
         <entry key="app/src/main/res/layout/fragment_details_annonce.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3038949275362319" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20322292473346718" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.10740740740740741" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.33488988994330837" />
         <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.21979166666666666" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.4035807855189129" />
-        <entry key="app/src/main/res/layout/main_menu_item_layout.xml" value="0.254500126211245" />
+        <entry key="app/src/main/res/layout/main_menu_item_layout.xml" value="0.6714086769644846" />
         <entry key="app/src/main/res/layout/mainbackground.xml" value="0.3532608695652174" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2359375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2359375" />

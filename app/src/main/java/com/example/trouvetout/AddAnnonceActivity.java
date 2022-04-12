@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide;
 import com.example.trouvetout.models.Annonce;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
@@ -114,7 +116,8 @@ public class AddAnnonceActivity extends AppCompatActivity {
                 if(((ImageView) findViewById(R.id.image4)).getDrawable() != null)
                     storageImage(findViewById(R.id.image4), "image4", key);
 
-                Annonce annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                Annonce annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto", user.getUid());
                 MainActivity.MDATABASE.child("Annonces").child(key).setValue(annonce);
 
 

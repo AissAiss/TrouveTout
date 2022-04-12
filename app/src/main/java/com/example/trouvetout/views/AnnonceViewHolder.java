@@ -2,7 +2,9 @@ package com.example.trouvetout.views;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
     public TextView nameTxt, dscrptTct, pos;
     public ImageView imageView;
     public String id;
+    public CheckBox checkBox;
 
     public AnnonceViewHolder(View itemView) {
         super(itemView);
@@ -30,6 +33,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
         pos =  (TextView) itemView.findViewById(R.id.position_annonce_card);
         imageView = (ImageView) itemView.findViewById(R.id.appercu_imageView);
         id = "no";
+        checkBox = (CheckBox) itemView.findViewById(R.id.rb_Fav);
 
         itemView.setTag(this);
         itemView.setOnClickListener(new View.OnClickListener() {

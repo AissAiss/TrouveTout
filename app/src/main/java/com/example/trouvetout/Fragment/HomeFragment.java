@@ -34,9 +34,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.ByteArrayInputStream;
 
 public class HomeFragment extends Fragment {
-
-    private AnnoncesAdapter annoncesAdapter;
-    FirebaseHelper helper;
     AnnoncesAdapter adapter;
     RecyclerView rv;
 
@@ -87,7 +84,8 @@ public class HomeFragment extends Fragment {
     // Function to tell the app to stop getting
     // data from database on stopping of the activity
     @Override public void onStop() {
-        super.onStop();if (adapter != null) {
+        super.onStop();
+        if (adapter != null) {
             adapter.stopListening();
         }
     }

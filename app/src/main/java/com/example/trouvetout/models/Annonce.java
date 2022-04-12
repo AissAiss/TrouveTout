@@ -13,16 +13,19 @@ public class Annonce {
     private String descpription;
     private String position;
 
+    private String idOwner;
+
     public Annonce(){
 
     }
 
-    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position) {
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position, String idOwner) {
         this.id = id;
         this.nom = nom;
         this.photo = photo;
         this.descpription = descpription;
         this.position = position;
+        this.idOwner = idOwner;
     }
 
     public String getNom() {
@@ -63,6 +66,14 @@ public class Annonce {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdOwner() {
+        return idOwner;
+    }
+
+    public void setIdOwner(String idOwner) {
+        this.idOwner = idOwner;
     }
 
     @Override

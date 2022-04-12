@@ -3,25 +3,38 @@ package com.example.trouvetout.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 //import com.firebase.ui.auth.AuthUI;
 import com.example.trouvetout.AddAnnonceActivity;
+import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
+import com.example.trouvetout.adapter.AnnoncesAdapter;
+import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.auth.AuthUI;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.Query;
 
 public class MyProfileFragment extends Fragment {
+    AnnoncesAdapter adapter;
+    RecyclerView rv;
 
     public MyProfileFragment() {
         // Required empty public constructor
@@ -39,6 +52,14 @@ public class MyProfileFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_my_profile, container, false);
         view.findViewById(R.id.buttonsignOut).setOnClickListener(signoutOutListener(view));
         view.findViewById(R.id.buttonAddAnnonce).setOnClickListener(addAnnonceListener(view));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        rv = view.findViewById(R.id.rv_own_annonce);
+        setupRecyclerView();
+
+
+        Toast.makeText(view.getContext(), user.getUid(), Toast.LENGTH_LONG ).show();
 
 
         return view;
@@ -79,6 +100,37 @@ public class MyProfileFragment extends Fragment {
 
             }
         };
+    }
+
+    private void setupRecyclerView() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = MainActivity.MDATABASE.getDatabase().getReference("Annonces")
+                .orderByChild("idOwner")
+                .equalTo(user.getUid());
+
+
+        FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                .setQuery(query, Annonce.class)
+                .build();
+        adapter = new AnnoncesAdapter(options);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+        rv.setAdapter(adapter);
+    }
+    @Override public void onStart() {
+        super.onStart();
+        if (adapter != null) {
+            adapter.startListening();
+        }
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override public void onStop() {
+        super.onStop();if (adapter != null) {
+            adapter.stopListening();
+        }
     }
 
 

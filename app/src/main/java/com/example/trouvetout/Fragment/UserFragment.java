@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,15 +26,19 @@ import android.widget.Toast;
 
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
+import com.example.trouvetout.adapter.AnnoncesAdapter;
+import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.Query;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +46,8 @@ import java.util.List;
 
 
 public class UserFragment extends Fragment {
+
+
 
      // Activité définit par Firebase pour la création d'un compte utilisateur
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -59,6 +67,9 @@ public class UserFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
     }
 
     @Override
@@ -66,6 +77,9 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_user, container, false);
+
+
+
         view.findViewById(R.id.ConnexionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
@@ -147,5 +161,7 @@ public class UserFragment extends Fragment {
             // ...
         }
     }
+
+
 
 }

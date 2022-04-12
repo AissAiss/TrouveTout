@@ -44,10 +44,10 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceViewHolder> {
+public class FavorisAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceViewHolder> {
     ArrayList<Favori> favoris = new ArrayList<>();
 
-    public AnnoncesAdapter(@NonNull FirebaseRecyclerOptions<Annonce> options) {
+    public FavorisAdapter(@NonNull FirebaseRecyclerOptions<Annonce> options) {
         super(options);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

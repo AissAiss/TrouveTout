@@ -41,7 +41,7 @@
         android:layout_width="194dp"
         android:layout_height="31dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/avenir_black"
         android:text="Mes annonces : "
         android:textSize="24sp"
@@ -68,4 +68,12 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonsignOut"
 
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_own_annonce"
+        android:layout_width="420dp"
+        android:layout_height="242dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
