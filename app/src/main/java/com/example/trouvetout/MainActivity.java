@@ -1,17 +1,23 @@
 package com.example.trouvetout;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.trouvetout.Fragment.FavFragment;
 import com.example.trouvetout.Fragment.HomeFragment;
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutFav      = findViewById(R.id.favLayout);
         linearLayoutMessage  = findViewById(R.id.messageLayout);
         linearLayoutShop     = findViewById(R.id.shopLayout);
-        button_User     = findViewById(R.id.btnUser);
+        button_User          = findViewById(R.id.btnUser);
 
 
 
@@ -124,6 +130,49 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        // TODO: Faire un système de gestion des permissions propre...
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(MainActivity.this, "READ", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            //Toast.makeText(MainActivity.this, "No READ", Toast.LENGTH_SHORT).show();
+            if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+                new AlertDialog.Builder(this)
+                        .setTitle("Permission")
+                        .setMessage("Dis oui")
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .create().show();
+
+            }
+            else {
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            }
+        }
+
+
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(MainActivity.this, "INTERNET", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(MainActivity.this, "No INTERNET", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void replaceCurrentFragmentBy(Fragment fragment){
