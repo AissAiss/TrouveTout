@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: Faire un système de gestion des permissions propre...
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(MainActivity.this, "READ", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "READ", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -166,11 +166,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(MainActivity.this, "INTERNET", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "INTERNET", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Toast.makeText(MainActivity.this, "No INTERNET", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "No INTERNET", Toast.LENGTH_SHORT).show();
         }
 
     }

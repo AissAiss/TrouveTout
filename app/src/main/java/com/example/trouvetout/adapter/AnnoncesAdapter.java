@@ -58,7 +58,7 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
     protected void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position, @NonNull Annonce model) {
         holder.nameTxt.setText(model.getNom());
         holder.dscrptTct.setText(model.getDescpription());
-        holder.pos.setText(model.getPosition());
+        //holder.pos.setText(model.getPosition());
         holder.id = this.getRef(position).getKey();
         dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
 
