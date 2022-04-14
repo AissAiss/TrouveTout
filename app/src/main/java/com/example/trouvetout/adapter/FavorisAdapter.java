@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
@@ -42,25 +43,35 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-public class FavorisAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceViewHolder> {
+public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
+    ArrayList<Annonce> annonces;
     ArrayList<Favori> favoris = new ArrayList<>();
 
-    public FavorisAdapter(@NonNull FirebaseRecyclerOptions<Annonce> options) {
-        super(options);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    @Override
+    public int getItemCount() {
+        return this.annonces.size();
+
+    }
+
+    public FavorisAdapter(ArrayList<Annonce> annonces) {
+        this.annonces = annonces;
+        Log.d("fezdscsdBindVIpqEW", String.valueOf(annonces));
 
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position, @NonNull Annonce model) {
-        holder.nameTxt.setText(model.getNom());
-        holder.dscrptTct.setText(model.getDescpription());
-        holder.pos.setText(model.getPosition());
-        holder.id = this.getRef(position).getKey();
-        dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
+    public void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position) {
+        Log.d("BindVIEW", annonces.get(position).toString());
+
+        holder.nameTxt.setText(annonces.get(position).getNom());
+        holder.dscrptTct.setText(annonces.get(position).getDescpription());
+        holder.pos.setText(annonces.get(position).getPosition());
+        holder.id = annonces.get(position).getId();
+        dlImageFromFireBaseStoarage(holder, annonces.get(position).getPhoto().get(0));
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -88,7 +99,7 @@ public class FavorisAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceView
 
 
         for(Favori favori: favoris){
-            if(favori.getIdAnnonce().equals(this.getRef(position).getKey())){
+            if(favori.getIdAnnonce().equals(annonces.get(position).getId())){
                 holder.checkBox.setChecked(true);
             }
         }

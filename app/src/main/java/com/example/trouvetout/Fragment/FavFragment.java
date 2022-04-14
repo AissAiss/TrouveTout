@@ -2,65 +2,132 @@ package com.example.trouvetout.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.trouvetout.R;
+import com.example.trouvetout.adapter.AnnoncesAdapter;
+import com.example.trouvetout.adapter.FavorisAdapter;
+import com.example.trouvetout.models.Annonce;
+import com.example.trouvetout.models.Favori;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FavFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FavFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Map;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class FavFragment extends Fragment{
+    ArrayList<Annonce> annonces;
+    AnnoncesAdapter adapter;
+    RecyclerView rv;
+    FirebaseUser user;
+
+
 
     public FavFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FavFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FavFragment newInstance(String param1, String param2) {
-        FavFragment fragment = new FavFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        annonces = new ArrayList<>();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_fav, container, false);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        rv = view.findViewById(R.id.rv_fav);
+
+
+        setupRecyclerView();
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav, container, false);
+        return view;
     }
+
+
+
+    private void setupRecyclerView() {
+        ArrayList<Annonce> annonces = new ArrayList<>();
+
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference query = FirebaseDatabase.getInstance().getReference()
+                .child("Favoris");
+        query.orderByChild("idUser")
+                .equalTo(user.getUid());
+
+        query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                for (DataSnapshot child : task.getResult().getChildren()) {
+                    Favori favori = child.getValue(Favori.class);
+                    Log.i("Fav", favori.toString());
+                    DatabaseReference query2 = FirebaseDatabase.getInstance().getReference()
+                            .child("Annonces")
+                            .child(favori.getIdAnnonce());
+                            query2.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            Log.i("final", task.getResult().getValue(Annonce.class).toString());
+                            annonces.add(task.getResult().getValue(Annonce.class));
+
+                            // un peu degueu mais j'ai juré j'ai la flemme
+                            FavorisAdapter adapter = new FavorisAdapter(annonces);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                            rv.setLayoutManager(linearLayoutManager);
+                            rv.setAdapter(adapter);
+                        }
+                    });
+
+
+
+
+
+                }
+
+            }
+        });
+
+    }
+
+    @Override public void onStart() {
+        super.onStart();
+        if (adapter != null) {
+            adapter.startListening();
+        }
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override public void onStop() {
+        super.onStop();
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+    }
+
 }
+
+

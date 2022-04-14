@@ -56,6 +56,7 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
 
     @Override
     protected void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position, @NonNull Annonce model) {
+        Log.d("BindVIEW", model.toString());
         holder.nameTxt.setText(model.getNom());
         holder.dscrptTct.setText(model.getDescpription());
         //holder.pos.setText(model.getPosition());
