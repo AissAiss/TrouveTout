@@ -64,36 +64,35 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
         dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
 
 
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        MainActivity.MDATABASE.getDatabase().getReference("Favoris").orderByChild("id").equalTo(user.getUid()+";"+holder.id).get().addOnCompleteListener(
-                new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()) {
-                            Log.d("firebase", String.valueOf(task.getResult().getValue()));
 
-                        } else {
-                            Favori favori = task.getResult().getValue(Favori.class);
-                            if(favori != null){
-                                holder.checkBox.setChecked(true);
-                            }else {
-                                holder.checkBox.setChecked(false);
+        if(user != null){
+            MainActivity.MDATABASE.getDatabase().getReference("Favoris").orderByChild("id").equalTo(user.getUid()+";"+holder.id).get().addOnCompleteListener(
+                    new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (!task.isSuccessful()) {
+                                Log.d("firebase", String.valueOf(task.getResult().getValue()));
 
+                            } else {
+                                Favori favori = task.getResult().getValue(Favori.class);
+                                if(favori != null){
+                                    holder.checkBox.setChecked(true);
+                                }else {
+                                    holder.checkBox.setChecked(false);
+
+                                }
                             }
-
                         }
                     }
+            );
+            for(Favori favori: favoris){
+                if(favori.getIdAnnonce().equals(this.getRef(position).getKey())){
+                    holder.checkBox.setChecked(true);
                 }
-        );
-
-
-
-        for(Favori favori: favoris){
-            if(favori.getIdAnnonce().equals(this.getRef(position).getKey())){
-                holder.checkBox.setChecked(true);
             }
         }
-
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -95,7 +95,7 @@ public class AddAnnonceActivity extends AppCompatActivity {
 
             }
         });
-
+        Activity activity = this;
         findViewById(R.id.buttonConfirmAnnonce).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +119,10 @@ public class AddAnnonceActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Annonce annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto", user.getUid());
                 MainActivity.MDATABASE.child("Annonces").child(key).setValue(annonce);
+
+                activity.finish();
+
+
 
 
             }

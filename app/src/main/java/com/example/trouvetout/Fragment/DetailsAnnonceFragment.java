@@ -103,7 +103,7 @@ public class DetailsAnnonceFragment extends Fragment {
                     annonce = task.getResult().getValue(Annonce.class);
 
                     title.setText(annonce.getNom());
-                    desc.setText(annonce.getPhoto().size()+" fd");
+                    desc.setText(annonce.getDescpription());
 
                     carouselView.setImageListener(imageListener);
                     carouselView.setPageCount(annonce.getPhoto().size());
