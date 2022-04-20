@@ -11,28 +11,39 @@
     android:paddingTop="10dp">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:id="@+id/fab"
-        android:tint="@android:color/white"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/custom_ic_sms"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:foreground="@drawable/ic_send"
+        app:backgroundTint="@color/white"
+        app:elevation="0dp"
         app:fabSize="mini" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/fab"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_toLeftOf="@id/fab"
+        app:boxBackgroundColor="@null"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/orange_trouve_tout">
 
         <EditText
+            android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input"
-            android:id="@+id/input"
-            />
+            android:cursorVisible="true"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:background="@drawable/input_message_bg"
+            android:hint="Message" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ListView

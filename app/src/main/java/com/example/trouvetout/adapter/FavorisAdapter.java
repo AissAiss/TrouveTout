@@ -69,7 +69,7 @@ public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
 
         holder.nameTxt.setText(annonces.get(position).getNom());
         holder.dscrptTct.setText(annonces.get(position).getDescpription());
-        holder.pos.setText(annonces.get(position).getPosition());
+//        holder.pos.setText(annonces.get(position).getPosition());
         holder.id = annonces.get(position).getId();
         dlImageFromFireBaseStoarage(holder, annonces.get(position).getPhoto().get(0));
 

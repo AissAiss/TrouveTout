@@ -2,29 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/teal_200">
+    android:background="@drawable/message_bg">
 
 <TextView
+    android:id="@+id/message_user"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/message_user"
+    android:layout_marginLeft="10dp"
     android:textStyle="normal|bold" />
 
 <TextView
+    android:id="@+id/message_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
     android:layout_alignBottom="@+id/message_user"
-    android:layout_alignParentEnd="true"
-    android:id="@+id/message_time" />
+    android:layout_alignParentEnd="true"/>
+
 
 <TextView
+    android:id="@+id/message_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/message_user"
     android:layout_alignParentStart="true"
-    android:layout_marginTop="5dp"
-    android:id="@+id/message_text"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="2dp"
     android:textSize="18sp" />
 </RelativeLayout>

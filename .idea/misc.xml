@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_home_2_fill.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable-v24/ic_profile_fill.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/color_cursor.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/custom_ic_call.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/custom_ic_lock.xml" value="0.2359375" />
@@ -28,12 +29,15 @@
         <entry key="app/src/main/res/drawable/ic_message.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_message_fill.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/ic_send.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart.xml" value="0.34152871296000126" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_fill.xml" value="0.14874972777008694" />
         <entry key="app/src/main/res/drawable/ic_sms.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/drawable/ic_sms_focused.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/icon_background.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/input_message_bg.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/drawable/main_bg.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/message_bg.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/top_shadow_gradient.xml" value="0.21944444444444444" />
         <entry key="app/src/main/res/drawable/user_icon_bg.xml" value="0.165" />
         <entry key="app/src/main/res/font-v26/avenir.xml" value="0.25" />

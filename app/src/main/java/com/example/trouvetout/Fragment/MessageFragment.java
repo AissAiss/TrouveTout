@@ -104,17 +104,21 @@ public class MessageFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase.getInstance()
-                        .getReference("Messages")
-                        .push()
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
-                        );
+                String message = input.getText().toString();
 
-                // Clear the input
-                input.setText("");
+                if(!message.isEmpty()){
+                    FirebaseDatabase.getInstance()
+                            .getReference("Messages")
+                            .push()
+                            .setValue(new ChatMessage(message,
+                                    FirebaseAuth.getInstance()
+                                            .getCurrentUser()
+                                            .getDisplayName())
+                            );
+
+                    // Clear the input
+                    input.setText("");
+                }
             }
         });
 
