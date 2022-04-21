@@ -25,6 +25,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
     public ImageView imageView;
     public String id;
     public CheckBox checkBox;
+    public View view;
 
     public AnnonceViewHolder(View itemView) {
         super(itemView);
@@ -34,6 +35,7 @@ public class AnnonceViewHolder extends RecyclerView.ViewHolder{
         imageView = (ImageView) itemView.findViewById(R.id.appercu_imageView);
         id = "no";
         checkBox = (CheckBox) itemView.findViewById(R.id.rb_Fav);
+        view = itemView;
 
         itemView.setTag(this);
         itemView.setOnClickListener(new View.OnClickListener() {

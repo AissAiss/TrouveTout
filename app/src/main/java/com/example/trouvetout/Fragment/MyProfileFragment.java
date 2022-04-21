@@ -22,6 +22,7 @@ import com.example.trouvetout.AddAnnonceActivity;
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
 import com.example.trouvetout.adapter.AnnoncesAdapter;
+import com.example.trouvetout.adapter.MesAnnoncesAdapter;
 import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.auth.AuthUI;
 
@@ -33,7 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Query;
 
 public class MyProfileFragment extends Fragment {
-    AnnoncesAdapter adapter;
+    MesAnnoncesAdapter adapter;
     RecyclerView rv;
 
     public MyProfileFragment() {
@@ -103,7 +104,6 @@ public class MyProfileFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Query query = MainActivity.MDATABASE.getDatabase().getReference("Annonces")
                 .orderByChild("idOwner")
@@ -113,7 +113,7 @@ public class MyProfileFragment extends Fragment {
         FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
                 .setQuery(query, Annonce.class)
                 .build();
-        adapter = new AnnoncesAdapter(options);
+        adapter = new MesAnnoncesAdapter(options);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
