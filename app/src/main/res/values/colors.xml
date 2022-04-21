@@ -13,4 +13,7 @@
     <color name="bleuFonce">#FF2660A4</color>
     <color name="colorPrimary">#F44336</color>
 
+    <color name="messageEnvoyes">#A15FA9FF</color>
+    <color name="orange_trouve_tout">#F19953</color>
+
 </resources>
