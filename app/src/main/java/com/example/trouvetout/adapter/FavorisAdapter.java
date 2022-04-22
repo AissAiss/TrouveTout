@@ -32,22 +32,18 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-
 public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
     ArrayList<Annonce> annonces;
     ArrayList<Favori> favoris = new ArrayList<>();
 
-
     @Override
     public int getItemCount() {
         return this.annonces.size();
-
     }
 
     public FavorisAdapter(ArrayList<Annonce> annonces) {
         this.annonces = annonces;
         Log.d("fezdscsdBindVIpqEW", String.valueOf(annonces));
-
     }
 
     @Override
@@ -56,7 +52,7 @@ public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
 
         holder.nameTxt.setText(annonces.get(position).getNom());
         holder.dscrptTct.setText(annonces.get(position).getDescpription());
-//        holder.pos.setText(annonces.get(position).getPosition());
+        holder.pos.setText(annonces.get(position).getPosition());
         holder.id = annonces.get(position).getId();
         dlImageFromFireBaseStoarage(holder, annonces.get(position).getPhoto().get(0));
 

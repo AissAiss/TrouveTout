@@ -3,12 +3,14 @@ package com.example.trouvetout.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
@@ -18,7 +20,6 @@ import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.Query;
 
 public class ConversationsFragment extends Fragment {
-
     private FirebaseListAdapter<Conversation> adapter;
 
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +29,7 @@ public class ConversationsFragment extends Fragment {
     private String mParam2;
 
     private ListView listOfConversations;
+    private Fragment fragment_Message;
 
     public ConversationsFragment() {
         // Required empty public constructor
@@ -50,6 +52,8 @@ public class ConversationsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        fragment_Message = new MessageFragment();
     }
 
     @Override
@@ -82,6 +86,16 @@ public class ConversationsFragment extends Fragment {
 
                 convTitre.setText(model.getNomAnnonce());
                 convDescription.setText(model.getId());
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, fragment_Message);
+                        ft.commit();
+                    }
+                });
+
             }
         };
 
