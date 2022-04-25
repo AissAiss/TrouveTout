@@ -29,7 +29,6 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.Map;
 
-
 public class FavFragment extends Fragment{
     ArrayList<Annonce> annonces;
     AnnoncesAdapter adapter;
@@ -70,8 +69,6 @@ public class FavFragment extends Fragment{
 
     private void setupRecyclerView() {
         ArrayList<Annonce> annonces = new ArrayList<>();
-
-
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference()

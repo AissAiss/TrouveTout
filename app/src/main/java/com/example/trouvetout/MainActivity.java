@@ -17,8 +17,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.example.trouvetout.Fragment.ConversationsFragment;
 import com.example.trouvetout.Fragment.FavFragment;
 import com.example.trouvetout.Fragment.HomeFragment;
 import com.example.trouvetout.Fragment.MessageFragment;
@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     // Les 5 fragments de l'applications
     private Fragment fragment_Fav;
     private Fragment fragment_Home;
-    private Fragment fragment_Message;
+    //private Fragment fragment_Message;
+    private Fragment fragment_Conv;
     private Fragment fragment_Shop;
     private Fragment fragment_User;
     private Fragment fragment_Profile;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragment_Fav        = new FavFragment();
         fragment_Home       = new HomeFragment();
-        fragment_Message    = new MessageFragment();
+        fragment_Conv       = new ConversationsFragment();
         fragment_Shop       = new ShopFragment();
         fragment_User       = new UserFragment();
         fragment_Profile    = new MyProfileFragment();
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeIconFromNavBar("message");
-                replaceCurrentFragmentBy(fragment_Message);
+                replaceCurrentFragmentBy(fragment_Conv);
             }
         });
 
@@ -179,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, fragment);
         ft.commit();
-
     }
+
     private void changeIconFromNavBar(String icon){
         findViewById(R.id.textHome).setVisibility(View.INVISIBLE);
         findViewById(R.id.textFav).setVisibility(View.INVISIBLE);

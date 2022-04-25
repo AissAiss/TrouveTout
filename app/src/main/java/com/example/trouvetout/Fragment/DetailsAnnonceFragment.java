@@ -11,19 +11,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
 import com.example.trouvetout.models.Annonce;
-import com.example.trouvetout.views.AnnonceViewHolder;
+import com.example.trouvetout.models.ChatMessage;
+import com.example.trouvetout.models.Conversation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -40,6 +44,7 @@ public class DetailsAnnonceFragment extends Fragment {
 
     private String id;
     private Annonce annonce;
+    private Button btnConctacter;
 
     public DetailsAnnonceFragment() {
         // Required empty public constructor
@@ -76,6 +81,38 @@ public class DetailsAnnonceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_details_annonce, container, false);
         initFragmentWithAnnonce(view, id);
+
+        btnConctacter = view.findViewById(R.id.btnContacter);
+
+        btnConctacter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String idAnnonce    = annonce.getId();
+                String idOwner      = annonce.getIdOwner();
+                String idClient     = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String nomOwner     = "";
+                String nomAnnonce   = annonce.getNom();
+
+                String id           = idAnnonce + idOwner + idClient;
+
+                FirebaseDatabase.getInstance()
+                        .getReference("Conversations")
+                        .push()
+                        .setValue(new Conversation(
+                                id,
+                                idAnnonce,
+                                idOwner,
+                                idClient,
+                                nomAnnonce,
+                                nomOwner)
+                        );
+
+
+
+            }
+        });
+
+
 
 
 

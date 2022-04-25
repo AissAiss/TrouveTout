@@ -126,7 +126,6 @@ public class MessageFragment extends Fragment {
     }
 
     private void displayChatMessages() {
-        //listOfMessages = getView().findViewById(R.id.list_of_messages);
         Query query = MainActivity.MDATABASE.getDatabase().getReference("Messages");
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()

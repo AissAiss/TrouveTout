@@ -1,31 +1,24 @@
 package com.example.trouvetout.adapter;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Debug;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trouvetout.Fragment.DetailsAnnonceFragment;
+
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
 import com.example.trouvetout.models.Annonce;
 import com.example.trouvetout.models.Favori;
 import com.example.trouvetout.views.AnnonceViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,33 +27,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
     ArrayList<Annonce> annonces;
     ArrayList<Favori> favoris = new ArrayList<>();
 
-
     @Override
     public int getItemCount() {
         return this.annonces.size();
-
     }
 
     public FavorisAdapter(ArrayList<Annonce> annonces) {
         this.annonces = annonces;
         Log.d("fezdscsdBindVIpqEW", String.valueOf(annonces));
-
     }
 
     @Override
@@ -69,7 +52,7 @@ public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
 
         holder.nameTxt.setText(annonces.get(position).getNom());
         holder.dscrptTct.setText(annonces.get(position).getDescpription());
-//        holder.pos.setText(annonces.get(position).getPosition());
+        holder.pos.setText(annonces.get(position).getPosition());
         holder.id = annonces.get(position).getId();
         dlImageFromFireBaseStoarage(holder, annonces.get(position).getPhoto().get(0));
 
