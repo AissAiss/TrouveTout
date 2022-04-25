@@ -54,25 +54,17 @@
                 android:inputType="textPersonName"
                 />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:id="@+id/fragmentAddAnnonce"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="16dp"
-                android:text="Description" />
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+                />
 
-            <EditText
-                android:id="@+id/editTextDescription"
-                android:layout_width="270dp"
-                android:layout_height="166dp"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/custom_input"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:padding="10sp" />
+
 
             <TextView
                 android:id="@+id/textView9"

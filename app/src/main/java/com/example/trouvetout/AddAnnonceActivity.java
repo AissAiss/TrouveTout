@@ -9,22 +9,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.trouvetout.models.Annonce;
-import com.example.trouvetout.views.AnnonceViewHolder;
+import com.example.trouvetout.models.AnnonceCar;
+import com.example.trouvetout.models.AnnonceHouse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,9 +38,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class AddAnnonceActivity extends AppCompatActivity {
 
@@ -48,29 +46,43 @@ public class AddAnnonceActivity extends AppCompatActivity {
     ImageView imageViewSelected ;
     ArrayList<String> photos;
     String id;
-
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_annonce);
-
         id = getIntent().getStringExtra("idAnnonce");
-
         if (id != null){
-
             ( (Button) findViewById(R.id.buttonConfirmAnnonce)).setText("Modifier");
-
             MainActivity.MDATABASE.child("Annonces").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    Annonce annonce = task.getResult().getValue(Annonce.class);
 
+                    Annonce annonce = task.getResult().getValue(Annonce.class);
+                    category = annonce.getCategorie();
+                    switch (category){
+                        case "Car":
+                            replaceCurrentFragmentBy(R.layout.fragment_car_add_annonce);
+                            annonce = task.getResult().getValue(AnnonceCar.class);
+                            ((EditText)  findViewById(R.id.editTextKilometrage)).setText(((AnnonceCar)annonce).getKilometrage()+"");
+                            break;
+                        case "House":
+                            replaceCurrentFragmentBy(R.layout.fragment_house_add_annonce);
+                            annonce = task.getResult().getValue(AnnonceHouse.class);
+                            ((EditText)  findViewById(R.id.editTextLoyer)).setText(((AnnonceHouse)annonce).getPrixLoyer()+"");
+                            ((EditText)  findViewById(R.id.editTextSurface)).setText(((AnnonceHouse)annonce).getSurface());
+                            ((EditText)  findViewById(R.id.editTextCaution)).setText((((AnnonceHouse)annonce).getCaution()+""));
+                            break;
+                        case "Other":
+                            replaceCurrentFragmentBy(R.layout.fragment_other_add_annonce);
+                            break;
+                    }
                     ((EditText)  findViewById(R.id.editTextTitleAnnonce)).setText(annonce.getNom());
                     ((EditText)  findViewById(R.id.editTextDescription)).setText(annonce.getDescpription());
 
-                    for(String s : annonce.getPhoto()){
 
+                    for(String s : annonce.getPhoto()){
                         switch (s.split("/")[1]){
                             case "image1.png":
                                 dlImageFromFireBaseStoarage(findViewById(R.id.image1),s);
@@ -89,21 +101,35 @@ public class AddAnnonceActivity extends AppCompatActivity {
                         }
 
                     }
-
-
                 }
             });
+        }else{
+            category = getIntent().getStringExtra("Category");
+            if(category != null){
+                switch (category){
+                    case "Other":
+                        replaceCurrentFragmentBy(R.layout.fragment_other_add_annonce);
+                        break;
+                    case "Car":
+                        replaceCurrentFragmentBy(R.layout.fragment_car_add_annonce);
+                        break;
+                    case "House":
+                        replaceCurrentFragmentBy(R.layout.fragment_house_add_annonce);
+                        break;
+                }
+            }
+
         }
+
+
+
+
 
 
 
 
         activity = this;
         photos = new ArrayList<>();
-
-
-
-
 
         findViewById(R.id.image1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,9 +183,44 @@ public class AddAnnonceActivity extends AppCompatActivity {
                      key = MainActivity.MDATABASE.getDatabase().getReference("Annonces").push().getKey();
                 else
                     key = id;
-
                 EditText nom = (EditText) findViewById(R.id.editTextTitleAnnonce);
                 EditText description = (EditText) findViewById(R.id.editTextDescription);
+                Annonce annonce;
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                switch (category){
+                    case "Car":
+                        EditText kilometrage = (EditText) findViewById(R.id.editTextKilometrage);
+                        annonce = new AnnonceCar(key,
+                                nom.getText().toString(),
+                                photos, description.getText().toString(),
+                                "toto",
+                                user.getUid(),
+                                category,
+                                Integer.parseInt(kilometrage.getText().toString()));
+                        break;
+                    case "House":
+                        EditText prixLoyer = (EditText) findViewById(R.id.editTextLoyer);
+                        EditText surface = (EditText) findViewById(R.id.editTextSurface);
+                        EditText caution = (EditText) findViewById(R.id.editTextCaution);
+
+                        annonce = new AnnonceHouse(key,
+                                nom.getText().toString(),
+                                photos, description.getText().toString(),
+                                "toto",
+                                user.getUid(),
+                                category,
+                                Double.parseDouble(prixLoyer.getText().toString()),
+                                surface.getText().toString(),
+                                Double.parseDouble(caution.getText().toString())
+                                );
+                        break;
+                    case "Other":
+                        annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto", user.getUid(), category);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + category);
+                }
 
 
 
@@ -172,8 +233,6 @@ public class AddAnnonceActivity extends AppCompatActivity {
                 if(((ImageView) findViewById(R.id.image4)).getDrawable() != null)
                     storageImage(findViewById(R.id.image4), "image4", key);
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Annonce annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto", user.getUid());
 
                 MainActivity.MDATABASE.child("Annonces").child(key).setValue(annonce);
                 activity.finish();
@@ -239,5 +298,11 @@ public class AddAnnonceActivity extends AppCompatActivity {
                 Log.e("error", "error dl Image");
             }
         });
+    }
+    private void replaceCurrentFragmentBy(int fragment){
+        FrameLayout frameLayout = findViewById(R.id.fragmentAddAnnonce);
+        LayoutInflater inflater = getLayoutInflater();
+        frameLayout.addView(inflater.inflate(fragment, null));
+
     }
 }

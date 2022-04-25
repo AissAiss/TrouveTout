@@ -3,11 +3,9 @@ package com.example.trouvetout.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,10 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.firebase.ui.auth.AuthUI;
-import com.example.trouvetout.AddAnnonceActivity;
+import com.example.trouvetout.ChooseCategoryActivity;
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
-import com.example.trouvetout.adapter.AnnoncesAdapter;
 import com.example.trouvetout.adapter.MesAnnoncesAdapter;
 import com.example.trouvetout.models.Annonce;
 import com.firebase.ui.auth.AuthUI;
@@ -52,17 +49,10 @@ public class MyProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_my_profile, container, false);
         view.findViewById(R.id.buttonsignOut).setOnClickListener(signoutOutListener(view));
-        view.findViewById(R.id.buttonAddAnnonce).setOnClickListener(addAnnonceListener(view));
-
+        view.findViewById(R.id.buttonChooseCategory).setOnClickListener(addAnnonceListener(view));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         rv = view.findViewById(R.id.rv_own_annonce);
         setupRecyclerView();
-
-
-        Toast.makeText(view.getContext(), user.getUid(), Toast.LENGTH_LONG ).show();
-
-
         return view;
     }
 
@@ -96,7 +86,7 @@ public class MyProfileFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AddAnnonceActivity.class);
+                Intent intent = new Intent(view.getContext(), ChooseCategoryActivity.class);
                 startActivity(intent);
 
             }

@@ -12,6 +12,7 @@ public class Annonce {
     private ArrayList<String> photo;
     private String descpription;
     private String position;
+    private String categorie;
 
     private String idOwner;
 
@@ -19,13 +20,14 @@ public class Annonce {
 
     }
 
-    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position, String idOwner) {
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position, String idOwner, String categorie) {
         this.id = id;
         this.nom = nom;
         this.photo = photo;
         this.descpription = descpription;
         this.position = position;
         this.idOwner = idOwner;
+        this.categorie = categorie;
     }
 
     public String getNom() {
@@ -76,13 +78,24 @@ public class Annonce {
         this.idOwner = idOwner;
     }
 
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
     @Override
     public String toString() {
         return "Annonce{" +
-                "nom='" + nom + '\'' +
-                ", photo='" + photo + '\'' +
+                "id='" + id + '\'' +
+                ", nom='" + nom + '\'' +
+                ", photo=" + photo +
                 ", descpription='" + descpription + '\'' +
                 ", position='" + position + '\'' +
+                ", categorie='" + categorie + '\'' +
+                ", idOwner='" + idOwner + '\'' +
                 '}';
     }
 }
