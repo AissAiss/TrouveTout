@@ -6,12 +6,18 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.trouvetout.models.Annonce;
@@ -43,70 +50,78 @@ public class AddAnnonceActivity extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMAGE = 1;
     Activity activity;
-    ImageView imageViewSelected ;
+    ImageView imageViewSelected;
     ArrayList<String> photos;
     String id;
     String category;
+    double longitude;
+    double lattitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_annonce);
         id = getIntent().getStringExtra("idAnnonce");
-        if (id != null){
-            ( (Button) findViewById(R.id.buttonConfirmAnnonce)).setText("Modifier");
+        if (id != null) {
+            ((Button) findViewById(R.id.buttonConfirmAnnonce)).setText("Modifier");
             MainActivity.MDATABASE.child("Annonces").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
 
                     Annonce annonce = task.getResult().getValue(Annonce.class);
                     category = annonce.getCategorie();
-                    switch (category){
+                    longitude = annonce.getLongitude();
+                    lattitude = annonce.getLattitude();
+                    switch (category) {
                         case "Car":
                             replaceCurrentFragmentBy(R.layout.fragment_car_add_annonce);
                             annonce = task.getResult().getValue(AnnonceCar.class);
-                            ((EditText)  findViewById(R.id.editTextKilometrage)).setText(((AnnonceCar)annonce).getKilometrage()+"");
+                            ((EditText) findViewById(R.id.editTextKilometrage)).setText(((AnnonceCar) annonce).getKilometrage() + "");
                             break;
                         case "House":
                             replaceCurrentFragmentBy(R.layout.fragment_house_add_annonce);
                             annonce = task.getResult().getValue(AnnonceHouse.class);
-                            ((EditText)  findViewById(R.id.editTextLoyer)).setText(((AnnonceHouse)annonce).getPrixLoyer()+"");
-                            ((EditText)  findViewById(R.id.editTextSurface)).setText(((AnnonceHouse)annonce).getSurface());
-                            ((EditText)  findViewById(R.id.editTextCaution)).setText((((AnnonceHouse)annonce).getCaution()+""));
+                            ((EditText) findViewById(R.id.editTextLoyer)).setText(((AnnonceHouse) annonce).getPrixLoyer() + "");
+                            ((EditText) findViewById(R.id.editTextSurface)).setText(((AnnonceHouse) annonce).getSurface());
+                            ((EditText) findViewById(R.id.editTextCaution)).setText((((AnnonceHouse) annonce).getCaution() + ""));
                             break;
                         case "Other":
                             replaceCurrentFragmentBy(R.layout.fragment_other_add_annonce);
                             break;
                     }
-                    ((EditText)  findViewById(R.id.editTextTitleAnnonce)).setText(annonce.getNom());
-                    ((EditText)  findViewById(R.id.editTextDescription)).setText(annonce.getDescpription());
+                    ((EditText) findViewById(R.id.editTextTitleAnnonce)).setText(annonce.getNom());
+                    ((EditText) findViewById(R.id.editTextDescription)).setText(annonce.getDescpription());
 
 
-                    for(String s : annonce.getPhoto()){
-                        switch (s.split("/")[1]){
+                    for (String s : annonce.getPhoto()) {
+                        switch (s.split("/")[1]) {
                             case "image1.png":
-                                dlImageFromFireBaseStoarage(findViewById(R.id.image1),s);
+                                dlImageFromFireBaseStoarage(findViewById(R.id.image1), s);
                                 break;
                             case "image2.png":
-                                dlImageFromFireBaseStoarage(findViewById(R.id.image2),s);
+                                dlImageFromFireBaseStoarage(findViewById(R.id.image2), s);
                                 break;
                             case "image3.png":
-                                dlImageFromFireBaseStoarage(findViewById(R.id.image3),s);
+                                dlImageFromFireBaseStoarage(findViewById(R.id.image3), s);
                                 break;
                             case "image4.png":
-                                dlImageFromFireBaseStoarage(findViewById(R.id.image4),s);
+                                dlImageFromFireBaseStoarage(findViewById(R.id.image4), s);
                                 break;
 
 
                         }
 
                     }
+
+
+
+
                 }
             });
-        }else{
+        } else {
             category = getIntent().getStringExtra("Category");
-            if(category != null){
-                switch (category){
+            if (category != null) {
+                switch (category) {
                     case "Other":
                         replaceCurrentFragmentBy(R.layout.fragment_other_add_annonce);
                         break;
@@ -120,12 +135,6 @@ public class AddAnnonceActivity extends AppCompatActivity {
             }
 
         }
-
-
-
-
-
-
 
 
         activity = this;
@@ -179,10 +188,32 @@ public class AddAnnonceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String key;
-                if(id == null)
-                     key = MainActivity.MDATABASE.getDatabase().getReference("Annonces").push().getKey();
-                else
+
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Location location = null;
+
+                try {
+                    location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                } catch (SecurityException e) {
+                    Toast.makeText(view.getContext(), "erreur, pas d'autorisation pour le GPS", Toast.LENGTH_LONG).show();
+                    activity.finish();
+                }
+
+
+
+
+
+
+
+                if(id == null) {
+                    key = MainActivity.MDATABASE.getDatabase().getReference("Annonces").push().getKey();
+                    longitude = location.getLongitude();
+                    lattitude = location.getLatitude();
+
+                }else {
                     key = id;
+
+                }
                 EditText nom = (EditText) findViewById(R.id.editTextTitleAnnonce);
                 EditText description = (EditText) findViewById(R.id.editTextDescription);
                 Annonce annonce;
@@ -194,7 +225,8 @@ public class AddAnnonceActivity extends AppCompatActivity {
                         annonce = new AnnonceCar(key,
                                 nom.getText().toString(),
                                 photos, description.getText().toString(),
-                                "toto",
+                                longitude,
+                                lattitude,
                                 user.getUid(),
                                 category,
                                 Integer.parseInt(kilometrage.getText().toString()));
@@ -207,7 +239,8 @@ public class AddAnnonceActivity extends AppCompatActivity {
                         annonce = new AnnonceHouse(key,
                                 nom.getText().toString(),
                                 photos, description.getText().toString(),
-                                "toto",
+                                longitude,
+                                lattitude,
                                 user.getUid(),
                                 category,
                                 Double.parseDouble(prixLoyer.getText().toString()),
@@ -216,7 +249,12 @@ public class AddAnnonceActivity extends AppCompatActivity {
                                 );
                         break;
                     case "Other":
-                        annonce = new Annonce(key, nom.getText().toString() , photos, description.getText().toString(), "toto", user.getUid(), category);
+                        annonce = new Annonce(key, nom.getText().toString(),
+                                photos, description.getText().toString(),
+                                longitude,
+                                lattitude,
+                                user.getUid(),
+                                category);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + category);
@@ -305,4 +343,6 @@ public class AddAnnonceActivity extends AppCompatActivity {
         frameLayout.addView(inflater.inflate(fragment, null));
 
     }
+
+
 }

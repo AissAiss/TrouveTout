@@ -11,8 +11,10 @@ public class Annonce {
     private String nom;
     private ArrayList<String> photo;
     private String descpription;
-    private String position;
     private String categorie;
+
+    private double longitude;
+    private double lattitude;
 
     private String idOwner;
 
@@ -20,12 +22,13 @@ public class Annonce {
 
     }
 
-    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, String position, String idOwner, String categorie) {
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie) {
         this.id = id;
         this.nom = nom;
         this.photo = photo;
         this.descpription = descpription;
-        this.position = position;
+        this.longitude = longitude;
+        this.lattitude = lattitude;
         this.idOwner = idOwner;
         this.categorie = categorie;
     }
@@ -54,12 +57,20 @@ public class Annonce {
         this.descpription = descpription;
     }
 
-    public String getPosition() {
-        return position;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(double lattitude) {
+        this.lattitude = lattitude;
     }
 
     public String getId() {
@@ -93,7 +104,7 @@ public class Annonce {
                 ", nom='" + nom + '\'' +
                 ", photo=" + photo +
                 ", descpription='" + descpription + '\'' +
-                ", position='" + position + '\'' +
+                ", position='" + lattitude + " : "+ longitude + '\'' +
                 ", categorie='" + categorie + '\'' +
                 ", idOwner='" + idOwner + '\'' +
                 '}';

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
 import com.example.trouvetout.models.Annonce;
+import com.example.trouvetout.models.AnnonceCar;
+import com.example.trouvetout.models.AnnonceHouse;
 import com.example.trouvetout.models.ChatMessage;
 import com.example.trouvetout.models.Conversation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -133,19 +137,35 @@ public class DetailsAnnonceFragment extends Fragment {
                 else {
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     TextView title = view.findViewById(R.id.titleDetailsAnnonce);
-                    TextView desc = view.findViewById(R.id.descpt_details_annonce);
                     CarouselView carouselView = view.findViewById(R.id.carouselView);
-                    Log.d("firebase", ""+carouselView);
+                    //Log.d("firebase", ""+carouselView);
 
                     annonce = task.getResult().getValue(Annonce.class);
-
                     title.setText(annonce.getNom());
+                    switch (annonce.getCategorie()){
+                        case "Car":
+                            replaceCurrentFragmentBy(R.layout.details_car_fragment, view);
+                            annonce = task.getResult().getValue(AnnonceCar.class);
+                            ((TextView)  view.findViewById(R.id.textViewKilommetrage)).setText(((AnnonceCar)annonce).getKilometrage()+"");
+                            break;
+                        case "House":
+                            replaceCurrentFragmentBy(R.layout.details_house_fragment, view);
+                            annonce = task.getResult().getValue(AnnonceHouse.class);
+                            ((TextView)  view.findViewById(R.id.textViewLoyer)).setText(((AnnonceHouse)annonce).getPrixLoyer()+"");
+                            ((TextView)  view.findViewById(R.id.textViewSurface)).setText(((AnnonceHouse)annonce).getSurface());
+                            ((TextView)  view.findViewById(R.id.textViewCaution)).setText((((AnnonceHouse)annonce).getCaution()+""));
+                            break;
+                        case "Other":
+                            replaceCurrentFragmentBy(R.layout.details_other_fragment, view);
+                            break;
+                    }
+                    TextView desc = view.findViewById(R.id.descpt_details_annonce);
                     desc.setText(annonce.getDescpription());
+
+
 
                     carouselView.setImageListener(imageListener);
                     carouselView.setPageCount(annonce.getPhoto().size());
-
-
                 }
             }
         });
@@ -175,7 +195,10 @@ public class DetailsAnnonceFragment extends Fragment {
         }
     };
 
-    private void dlImageFromFireBaseStoarage(String url){
+    private void replaceCurrentFragmentBy(int fragment, View view){
+        FrameLayout frameLayout = view.findViewById(R.id.fragmentDetailsAnnonce);
+        LayoutInflater inflater = getLayoutInflater();
+        frameLayout.addView(inflater.inflate(fragment, null));
 
     }
 }

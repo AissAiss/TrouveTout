@@ -8,8 +8,8 @@ public class AnnonceCar extends Annonce{
     public AnnonceCar() {
     }
 
-    public AnnonceCar(String id, String nom, ArrayList<String> photo, String descpription, String position, String idOwner, String categorie, int kilometrage) {
-        super(id, nom, photo, descpription, position, idOwner, categorie);
+    public AnnonceCar(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie, int kilometrage) {
+        super(id, nom, photo, descpription, longitude, lattitude, idOwner, categorie);
         this.kilometrage = kilometrage;
     }
 

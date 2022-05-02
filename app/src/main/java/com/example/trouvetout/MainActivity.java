@@ -9,14 +9,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.trouvetout.Fragment.ConversationsFragment;
 import com.example.trouvetout.Fragment.FavFragment;
@@ -30,6 +37,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -173,6 +184,25 @@ public class MainActivity extends AppCompatActivity {
         {
             //Toast.makeText(MainActivity.this, "No INTERNET", Toast.LENGTH_SHORT).show();
         }
+
+
+        ActivityCompat.requestPermissions(this, new
+                String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
+        ActivityCompat.requestPermissions(this, new
+                String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+
+
+
+
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+        }else {
+
+        }
+
+
+
 
     }
 

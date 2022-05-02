@@ -3,6 +3,8 @@ package com.example.trouvetout.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,10 +40,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceViewHolder> {
@@ -59,7 +63,24 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
         Log.d("BindVIEW", model.toString());
         holder.nameTxt.setText(model.getNom());
         holder.dscrptTct.setText(model.getDescpription());
-        holder.pos.setText(model.getPosition());
+
+        Geocoder geocoder = new Geocoder(holder.view.getContext(), Locale.getDefault());
+        List<Address> addresses =null;
+        try {
+             addresses = geocoder.getFromLocation(model.getLattitude(), model.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size() > 0)
+        {
+            String cityName = addresses.get(0).getAddressLine(0);
+            holder.pos.setText(cityName);
+        }
+        else
+        {
+            holder.pos.setText("erreur");
+
+        }
         holder.id = this.getRef(position).getKey();
         dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
 

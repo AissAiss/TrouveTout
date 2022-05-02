@@ -88,7 +88,7 @@ public class FavFragment extends Fragment{
                             query2.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            Log.i("final", task.getResult().getValue(Annonce.class).toString());
+                       //     Log.i("final", task.getResult().getValue(Annonce.class).toString());
                             annonces.add(task.getResult().getValue(Annonce.class));
 
                             // un peu degueu mais j'ai juré j'ai la flemme

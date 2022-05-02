@@ -4,6 +4,8 @@ package com.example.trouvetout.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
     ArrayList<Annonce> annonces;
@@ -52,7 +57,18 @@ public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
 
         holder.nameTxt.setText(annonces.get(position).getNom());
         holder.dscrptTct.setText(annonces.get(position).getDescpription());
-        holder.pos.setText(annonces.get(position).getPosition());
+
+        Geocoder geocoder = new Geocoder(holder.view.getContext(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(annonces.get(position).getLattitude(), annonces.get(position).getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        holder.pos.setText(addresses.get(0).getAddressLine(0));
+
+
+
         holder.id = annonces.get(position).getId();
         dlImageFromFireBaseStoarage(holder, annonces.get(position).getPhoto().get(0));
 

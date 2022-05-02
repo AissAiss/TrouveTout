@@ -15,6 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.trouvetout.Helper.FirebaseHelper;
 import com.example.trouvetout.MainActivity;
@@ -32,6 +35,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     AnnoncesAdapter adapter;
@@ -51,8 +56,94 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         // Inflate the layout for this fragment
+
         rv = view.findViewById(R.id.rv_home);
+
+        List<String> spinnerArray =  new ArrayList<String>();
+        spinnerArray.add("Tous");
+        spinnerArray.add("Voitures");
+        spinnerArray.add("Maisons/appartement");
+        spinnerArray.add("Autres");
+
         setupRecyclerView();
+
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                view.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) view.findViewById(R.id.spinner);
+        sItems.setAdapter(adapter);
+
+        HomeFragment homeFragment = this;
+
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view1, int i, long l) {
+
+                Log.d("TESTOTOTOT", rv + " ");
+                String s = (String) adapterView.getItemAtPosition(i);
+                Query query;
+                FirebaseRecyclerOptions<Annonce> options;
+                AnnoncesAdapter adapter1;
+                LinearLayoutManager linearLayoutManager;
+                Log.d("ALLES", s);
+
+                switch (s){
+                    case "Voitures":
+                        Log.d("ALLES", "Voitures");
+                        query = MainActivity.MDATABASE.getDatabase().getReference("Annonces").orderByChild("categorie").equalTo("Car");
+                        options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                                .setQuery(query, Annonce.class)
+                                .build();
+                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                        rv.setLayoutManager(linearLayoutManager);
+                        rv.setAdapter(homeFragment.adapter);
+
+                        break;
+                    case "Maisons/appartement":
+                        query = MainActivity.MDATABASE.getDatabase().getReference("Annonces").orderByChild("categorie").equalTo("House");
+                        options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                                .setQuery(query, Annonce.class)
+                                .build();
+                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                        rv.setLayoutManager(linearLayoutManager);
+                        rv.setAdapter(homeFragment.adapter);
+                        homeFragment.adapter.startListening();
+                        break;
+                    case "Autres":
+                        query = MainActivity.MDATABASE.getDatabase().getReference("Annonces").orderByChild("categorie").equalTo("Other");
+                        options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                                .setQuery(query, Annonce.class)
+                                .build();
+                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                        rv.setLayoutManager(linearLayoutManager);
+                        rv.setAdapter(homeFragment.adapter);
+                        homeFragment.adapter.startListening();
+                        break;
+                    default:
+                        query = MainActivity.MDATABASE.getDatabase().getReference("Annonces");
+                        options = new FirebaseRecyclerOptions.Builder<Annonce>()
+                                .setQuery(query, Annonce.class)
+                                .build();
+                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        //linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                        //rv.setLayoutManager(linearLayoutManager);
+                        rv.setAdapter(homeFragment.adapter);
+                        homeFragment.adapter.startListening();
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         return view;
     }
 
@@ -70,6 +161,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
+
     }
 
     // Function to tell the app to start getting
