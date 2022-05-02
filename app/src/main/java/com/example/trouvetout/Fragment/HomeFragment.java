@@ -88,8 +88,6 @@ public class HomeFragment extends Fragment {
                 FirebaseRecyclerOptions<Annonce> options;
                 AnnoncesAdapter adapter1;
                 LinearLayoutManager linearLayoutManager;
-                Log.d("ALLES", s);
-
                 switch (s){
                     case "Voitures":
                         Log.d("ALLES", "Voitures");
@@ -97,10 +95,12 @@ public class HomeFragment extends Fragment {
                         options = new FirebaseRecyclerOptions.Builder<Annonce>()
                                 .setQuery(query, Annonce.class)
                                 .build();
-                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        homeFragment.adapter = new AnnoncesAdapter(options, getContext());
                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(linearLayoutManager);
                         rv.setAdapter(homeFragment.adapter);
+                        homeFragment.adapter.startListening();
+
 
                         break;
                     case "Maisons/appartement":
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
                         options = new FirebaseRecyclerOptions.Builder<Annonce>()
                                 .setQuery(query, Annonce.class)
                                 .build();
-                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        homeFragment.adapter = new AnnoncesAdapter(options,getContext());
                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(linearLayoutManager);
                         rv.setAdapter(homeFragment.adapter);
@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
                         options = new FirebaseRecyclerOptions.Builder<Annonce>()
                                 .setQuery(query, Annonce.class)
                                 .build();
-                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        homeFragment.adapter = new AnnoncesAdapter(options,getContext());
                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(linearLayoutManager);
                         rv.setAdapter(homeFragment.adapter);
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment {
                         options = new FirebaseRecyclerOptions.Builder<Annonce>()
                                 .setQuery(query, Annonce.class)
                                 .build();
-                        homeFragment.adapter = new AnnoncesAdapter(options);
+                        homeFragment.adapter = new AnnoncesAdapter(options,getContext());
                         //linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         //rv.setLayoutManager(linearLayoutManager);
                         rv.setAdapter(homeFragment.adapter);
@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment {
         FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
                 .setQuery(query, Annonce.class)
                 .build();
-        adapter = new AnnoncesAdapter(options);
+        adapter = new AnnoncesAdapter(options,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
