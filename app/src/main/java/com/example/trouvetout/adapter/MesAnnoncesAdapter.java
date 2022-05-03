@@ -80,6 +80,18 @@ public class MesAnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, Annonce
                                 for(String s: model.getPhoto()){
                                     MainActivity.STORAGE.getReference().child(s).delete();
                                 }
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                MainActivity.MDATABASE.child("Favoris").orderByChild("idAnnonce").equalTo(model.getId())
+                                        .get().addOnCompleteListener(
+                                                new OnCompleteListener<DataSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                        for (DataSnapshot appleSnapshot: task.getResult().getChildren()) {
+                                                            appleSnapshot.getRef().removeValue();
+                                                        }
+                                                    }
+                                                }
+                                );
                             }
                         })
                         .setNegativeButton("Edition", new DialogInterface.OnClickListener() {

@@ -64,18 +64,13 @@ public class AddAnnonceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_annonce);
         id = getIntent().getStringExtra("idAnnonce");
 
-
         checkPersmissionPro();
-
-
-
 
         if (id != null) {
             ((Button) findViewById(R.id.buttonConfirmAnnonce)).setText("Modifier");
             MainActivity.MDATABASE.child("Annonces").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-
                     Annonce annonce = task.getResult().getValue(Annonce.class);
                     category = annonce.getCategorie();
                     longitude = annonce.getLongitude();
@@ -115,17 +110,11 @@ public class AddAnnonceActivity extends AppCompatActivity {
                             case "image4.png":
                                 dlImageFromFireBaseStoarage(findViewById(R.id.image4), s);
                                 break;
-
-
                         }
-
                     }
-
-
-
-
                 }
             });
+
         } else {
             category = getIntent().getStringExtra("Category");
             if (category != null) {
@@ -294,11 +283,9 @@ public class AddAnnonceActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         UserPro userPro = task.getResult().getValue(UserPro.class);
-                        Log.d("TestPro", userPro + "" );
                         if (userPro.getNumCard() == null){
                             findViewById(R.id.image3).setVisibility(View.INVISIBLE);
                             findViewById(R.id.image4).setVisibility(View.INVISIBLE);
-
                         }
 
                     }

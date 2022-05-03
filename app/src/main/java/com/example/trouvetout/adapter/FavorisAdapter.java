@@ -65,8 +65,13 @@ public class FavorisAdapter extends RecyclerView.Adapter<AnnonceViewHolder> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        holder.pos.setText(addresses.get(0).getAddressLine(0));
+        if (addresses.size() > 0) {
+            String cityName = addresses.get(0).getLocality();
+            holder.pos.setText(cityName);
 
+        } else {
+            holder.pos.setText("Erreur");
+        }
 
 
         holder.id = annonces.get(position).getId();
