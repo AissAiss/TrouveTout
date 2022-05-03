@@ -64,10 +64,7 @@ public class HomeFragment extends Fragment {
         spinnerArray.add("Voitures");
         spinnerArray.add("Maisons/appartement");
         spinnerArray.add("Autres");
-
         setupRecyclerView();
-
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 view.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
@@ -81,8 +78,6 @@ public class HomeFragment extends Fragment {
         sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view1, int i, long l) {
-
-                Log.d("TESTOTOTOT", rv + " ");
                 String s = (String) adapterView.getItemAtPosition(i);
                 Query query;
                 FirebaseRecyclerOptions<Annonce> options;
@@ -90,7 +85,6 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager linearLayoutManager;
                 switch (s){
                     case "Voitures":
-                        Log.d("ALLES", "Voitures");
                         query = MainActivity.MDATABASE.getDatabase().getReference("Annonces").orderByChild("categorie").equalTo("Car");
                         options = new FirebaseRecyclerOptions.Builder<Annonce>()
                                 .setQuery(query, Annonce.class)
@@ -100,8 +94,6 @@ public class HomeFragment extends Fragment {
                         rv.setLayoutManager(linearLayoutManager);
                         rv.setAdapter(homeFragment.adapter);
                         homeFragment.adapter.startListening();
-
-
                         break;
                     case "Maisons/appartement":
                         query = MainActivity.MDATABASE.getDatabase().getReference("Annonces").orderByChild("categorie").equalTo("House");

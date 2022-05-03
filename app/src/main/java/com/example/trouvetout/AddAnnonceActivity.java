@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.example.trouvetout.models.Annonce;
 import com.example.trouvetout.models.AnnonceCar;
 import com.example.trouvetout.models.AnnonceHouse;
+import com.example.trouvetout.models.UserPro;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -62,6 +63,13 @@ public class AddAnnonceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_annonce);
         id = getIntent().getStringExtra("idAnnonce");
+
+
+        checkPersmissionPro();
+
+
+
+
         if (id != null) {
             ((Button) findViewById(R.id.buttonConfirmAnnonce)).setText("Modifier");
             MainActivity.MDATABASE.child("Annonces").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -278,6 +286,27 @@ public class AddAnnonceActivity extends AppCompatActivity {
         });
 
     }
+
+    private void checkPersmissionPro() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        MainActivity.MDATABASE.child("users").child(user.getUid()).get().addOnCompleteListener(
+                new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        UserPro userPro = task.getResult().getValue(UserPro.class);
+                        Log.d("TestPro", userPro + "" );
+                        if (userPro.getNumCard() == null){
+                            findViewById(R.id.image3).setVisibility(View.INVISIBLE);
+                            findViewById(R.id.image4).setVisibility(View.INVISIBLE);
+
+                        }
+
+                    }
+                }
+        );
+
+    }
+
     public void storageImage(ImageView imageView, String nom, String key){
         // Get the data from an ImageView as bytes
         imageView.setDrawingCacheEnabled(true);

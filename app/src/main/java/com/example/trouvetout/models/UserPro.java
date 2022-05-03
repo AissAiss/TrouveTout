@@ -38,4 +38,13 @@ public class UserPro extends User{
     public void setCodeSecret(String codeSecret) {
         this.codeSecret = codeSecret;
     }
+
+    @Override
+    public String toString() {
+        return "UserPro{" +
+                "numCard='" + numCard + '\'' +
+                ", expiration='" + expiration + '\'' +
+                ", codeSecret='" + codeSecret + '\'' +
+                '}';
+    }
 }

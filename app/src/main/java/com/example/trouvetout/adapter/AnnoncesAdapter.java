@@ -5,30 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Bundle;
-import android.os.Debug;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trouvetout.Fragment.DetailsAnnonceFragment;
 import com.example.trouvetout.MainActivity;
 import com.example.trouvetout.R;
 import com.example.trouvetout.models.Annonce;
 import com.example.trouvetout.models.Favori;
-import com.example.trouvetout.models.LocationAddress;
 import com.example.trouvetout.views.AnnonceViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -40,14 +28,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -80,18 +65,12 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
             e.printStackTrace();
         }
         if (addresses.size() > 0) {
-            String cityName = addresses.get(0).getAddressLine(0);
+            String cityName = addresses.get(0).getLocality();
             holder.pos.setText(cityName);
 
         } else {
             holder.pos.setText(model.getLattitude() + "; "+ model.getLongitude());
-
         }
-        LocationAddress locationAddress = new LocationAddress();
-        GeocoderHandler geocoderHandler = new GeocoderHandler();
-        geocoderHandler.tx = holder.pos;
-        locationAddress.getAddressFromLocation(	40.712784, -74.005941, context, new GeocoderHandler());
-
 
         holder.id = this.getRef(position).getKey();
         dlImageFromFireBaseStoarage(holder, model.getPhoto().get(0));
@@ -188,22 +167,4 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
             }
         });
     }
-
-    private class GeocoderHandler extends Handler {
-        TextView tx;
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
-            Log.d("ALLEEDDD", locationAddress);
-        }
-    }
-
 }

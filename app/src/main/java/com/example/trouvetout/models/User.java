@@ -37,4 +37,13 @@ public class User {
     public void setNum(String num) {
         this.num = num;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", num='" + num + '\'' +
+                '}';
+    }
 }
