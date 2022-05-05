@@ -107,6 +107,7 @@ public class Annonce {
         this.nomOwner = nomOwner;
     }
 
+
     @Override
     public String toString() {
         return "Annonce{" +
@@ -117,6 +118,7 @@ public class Annonce {
                 ", position='" + lattitude + " : "+ longitude + '\'' +
                 ", categorie='" + categorie + '\'' +
                 ", idOwner='" + idOwner + '\'' +
+                ", nomOwner='" + nomOwner + '\'' +
                 '}';
     }
 }
