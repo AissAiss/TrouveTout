@@ -113,7 +113,8 @@ public class MessageFragment extends Fragment {
                             .setValue(new ChatMessage(message,
                                     FirebaseAuth.getInstance()
                                             .getCurrentUser()
-                                            .getDisplayName())
+                                            .getDisplayName(),
+                                    ConversationsFragment.ID_CURRENT_CONVERSATION)
                             );
 
                     // Clear the input
@@ -126,7 +127,11 @@ public class MessageFragment extends Fragment {
     }
 
     private void displayChatMessages() {
-        Query query = MainActivity.MDATABASE.getDatabase().getReference("Messages");
+        Query query = MainActivity.MDATABASE.getDatabase()
+                .getReference("Messages")
+                .orderByChild("idConversation")// idConversation
+                .equalTo(ConversationsFragment.ID_CURRENT_CONVERSATION); // idConversation de conv courante
+
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)

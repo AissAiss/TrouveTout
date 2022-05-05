@@ -30,11 +30,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,7 +98,9 @@ public class DetailsAnnonceFragment extends Fragment {
                 String idOwner      = annonce.getIdOwner();
                 String idClient     = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String nomOwner     = "";
+                String nomClient    = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                 String nomAnnonce   = annonce.getNom();
+                String miniature    = annonce.getPhoto().get(0);
 
                 String id           = idAnnonce + idOwner + idClient;
 
@@ -108,7 +113,9 @@ public class DetailsAnnonceFragment extends Fragment {
                                 idOwner,
                                 idClient,
                                 nomAnnonce,
-                                nomOwner)
+                                nomOwner,
+                                nomClient,
+                                miniature)
                         );
 
 

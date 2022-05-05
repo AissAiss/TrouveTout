@@ -47,10 +47,12 @@
         <entry key="app/src/main/res/layout/activity_add_annonce.xml" value="0.22913861467144103" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.27509112141231007" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22507850807034346" />
+        <entry key="app/src/main/res/layout/conversation.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/details_car_fragment.xml" value="0.45131370601143206" />
-        <entry key="app/src/main/res/layout/details_house_fragment.xml" value="0.8558580224216612" />
-        <entry key="app/src/main/res/layout/details_other_fragment.xml" value="0.5606612533576169" />
+        <entry key="app/src/main/res/layout/details_house_fragment.xml" value="0.32518115942028986" />
+        <entry key="app/src/main/res/layout/details_other_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_car_add_annonce.xml" value="0.487221480273968" />
+        <entry key="app/src/main/res/layout/fragment_conversations.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_details_annonce.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.41271926603666287" />

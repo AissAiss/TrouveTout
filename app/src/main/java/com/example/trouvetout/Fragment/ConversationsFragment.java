@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import com.example.trouvetout.R;
 import com.example.trouvetout.models.Conversation;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Query;
 
 public class ConversationsFragment extends Fragment {
@@ -28,8 +32,13 @@ public class ConversationsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RadioButton radioButtonAchats;
+    private RadioButton radioButtonVentes;
+    private RadioGroup radioGroup;
     private ListView listOfConversations;
     private Fragment fragment_Message;
+
+    public static String ID_CURRENT_CONVERSATION;
 
     public ConversationsFragment() {
         // Required empty public constructor
@@ -63,15 +72,44 @@ public class ConversationsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_conversations, container, false);
 
         listOfConversations = view.findViewById(R.id.listofconversations);
+        radioButtonAchats = view.findViewById(R.id.radioButtonAchats);
+        radioButtonVentes = view.findViewById(R.id.radioButtonVentes);
+        radioGroup = view.findViewById(R.id.radioGroup);
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                switch(checkedId)
+                {
+                    case R.id.radioButtonAchats:
+                        displayConversation("idClient");
 
-        diplayConversation();
+                        break;
+                    case R.id.radioButtonVentes:
+                        displayConversation("idOwner");
 
+                        break;
+                }
+                //displayConversation();
+            }
+        });
+
+        displayConversation("idClient");
         return view;
     }
 
-    private void diplayConversation(){
-        Query query = MainActivity.MDATABASE.getDatabase().getReference("Conversations");
+    private void displayConversation(String child){
+        //listOfConversations.setAdapter(null);
+
+        //Toast.makeText(getContext(), "Display " + child, Toast.LENGTH_SHORT).show();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        Query query = MainActivity.MDATABASE.getDatabase().getReference("Conversations")
+                .orderByChild(child)
+                .equalTo(user.getUid());
+
 
         FirebaseListOptions<Conversation> options = new FirebaseListOptions.Builder<Conversation>()
                 .setQuery(query, Conversation.class)
@@ -90,6 +128,7 @@ public class ConversationsFragment extends Fragment {
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ID_CURRENT_CONVERSATION = model.getId();
                         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
                         ft.replace(R.id.fragment, fragment_Message);
                         ft.commit();
@@ -99,9 +138,8 @@ public class ConversationsFragment extends Fragment {
             }
         };
 
-
         listOfConversations.setAdapter(adapter);
-
+        adapter.startListening();
     }
 
     @Override public void onStart() {

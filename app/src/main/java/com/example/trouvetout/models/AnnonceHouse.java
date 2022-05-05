@@ -11,8 +11,8 @@ public class AnnonceHouse extends Annonce {
     }
 
 
-    public AnnonceHouse(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie, double prixLoyer, String surface, double caution) {
-        super(id, nom, photo, descpription, longitude, lattitude, idOwner, categorie);
+    public AnnonceHouse(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String nomOwner, String categorie, double prixLoyer, String surface, double caution) {
+        super(id, nom, photo, descpription, longitude, lattitude, idOwner, nomOwner, categorie);
         this.prixLoyer = prixLoyer;
         this.surface = surface;
         this.caution = caution;

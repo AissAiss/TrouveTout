@@ -17,20 +17,22 @@ public class Annonce {
     private double lattitude;
 
     private String idOwner;
+    private String nomOwner;
 
     public Annonce(){
 
     }
 
-    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie) {
-        this.id = id;
-        this.nom = nom;
-        this.photo = photo;
-        this.descpription = descpription;
-        this.longitude = longitude;
-        this.lattitude = lattitude;
-        this.idOwner = idOwner;
-        this.categorie = categorie;
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie, String nomOwner) {
+        this.id             = id;
+        this.nom            = nom;
+        this.photo          = photo;
+        this.descpription   = descpription;
+        this.longitude      = longitude;
+        this.lattitude      = lattitude;
+        this.idOwner        = idOwner;
+        this.categorie      = categorie;
+        this.nomOwner       = nomOwner;
     }
 
     public String getNom() {
@@ -95,6 +97,14 @@ public class Annonce {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    public String getNomOwner() {
+        return nomOwner;
+    }
+
+    public void setNomOwner(String nomOwner) {
+        this.nomOwner = nomOwner;
     }
 
     @Override

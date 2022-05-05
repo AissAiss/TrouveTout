@@ -7,18 +7,22 @@ public class Conversation {
     private String idClient;
     private String nomAnnonce;
     private String nomOwner;
+    private String nomClient;
+    private String miniature;
 
     public Conversation() {
 
     }
 
-    public Conversation(String id, String idAnnonces, String idOwner, String idClient, String nomAnnonce, String nomOwner) {
+    public Conversation(String id, String idAnnonces, String idOwner, String idClient, String nomAnnonce, String nomOwner, String nomClient, String miniature) {
         this.id = id;
         this.idAnnonces = idAnnonces;
         this.idOwner = idOwner;
         this.idClient = idClient;
         this.nomAnnonce = nomAnnonce;
         this.nomOwner = nomOwner;
+        this.nomClient = nomClient;
+        this.miniature = miniature;
     }
 
     public String getId() {
@@ -67,5 +71,21 @@ public class Conversation {
 
     public void setNomOwner(String nomOwner) {
         this.nomOwner = nomOwner;
+    }
+
+    public String getNomClient() {
+        return nomClient;
+    }
+
+    public void setNomClient(String nomClient) {
+        this.nomClient = nomClient;
+    }
+
+    public String getMiniature() {
+        return miniature;
+    }
+
+    public void setMiniature(String miniature) {
+        this.miniature = miniature;
     }
 }

@@ -225,6 +225,7 @@ public class AddAnnonceActivity extends AppCompatActivity {
                                 longitude,
                                 lattitude,
                                 user.getUid(),
+                                user.getDisplayName(),
                                 category,
                                 Integer.parseInt(kilometrage.getText().toString()));
                         break;
@@ -239,6 +240,7 @@ public class AddAnnonceActivity extends AppCompatActivity {
                                 longitude,
                                 lattitude,
                                 user.getUid(),
+                                user.getDisplayName(),
                                 category,
                                 Double.parseDouble(prixLoyer.getText().toString()),
                                 surface.getText().toString(),
@@ -251,6 +253,7 @@ public class AddAnnonceActivity extends AppCompatActivity {
                                 longitude,
                                 lattitude,
                                 user.getUid(),
+                                user.getDisplayName(),
                                 category);
                         break;
                     default:
