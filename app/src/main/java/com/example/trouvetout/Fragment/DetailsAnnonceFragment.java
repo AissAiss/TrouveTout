@@ -97,7 +97,7 @@ public class DetailsAnnonceFragment extends Fragment {
                 String idAnnonce    = annonce.getId();
                 String idOwner      = annonce.getIdOwner();
                 String idClient     = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String nomOwner     = "";
+                String nomOwner     = annonce.getNomOwner();
                 String nomClient    = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                 String nomAnnonce   = annonce.getNom();
                 String miniature    = annonce.getPhoto().get(0);

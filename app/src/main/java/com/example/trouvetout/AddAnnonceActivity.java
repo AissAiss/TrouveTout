@@ -186,26 +186,21 @@ public class AddAnnonceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String key;
 
-                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                Location location = null;
+                // TODO : Régler cette merde de localisation de mort
+                //LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                //Location location = null;
 
                 try {
-                    location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    //location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 } catch (SecurityException e) {
                     Toast.makeText(view.getContext(), "erreur, pas d'autorisation pour le GPS", Toast.LENGTH_LONG).show();
                     activity.finish();
                 }
 
-
-
-
-
-
-
                 if(id == null) {
                     key = MainActivity.MDATABASE.getDatabase().getReference("Annonces").push().getKey();
-                    longitude = location.getLongitude();
-                    lattitude = location.getLatitude();
+                    longitude = 43.6036036036036; //location.getLongitude();
+                    lattitude = 3.8816465074753554; // location.getLatitude();
 
                 }else {
                     key = id;

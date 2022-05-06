@@ -23,7 +23,7 @@ public class Annonce {
 
     }
 
-    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String categorie, String nomOwner) {
+    public Annonce(String id, String nom, ArrayList<String> photo, String descpription, double longitude, double lattitude, String idOwner, String nomOwner, String categorie) {
         this.id             = id;
         this.nom            = nom;
         this.photo          = photo;
