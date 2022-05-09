@@ -1,13 +1,18 @@
 package com.example.trouvetout.Fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,9 +24,12 @@ import com.example.trouvetout.R;
 import com.example.trouvetout.models.Conversation;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.StorageReference;
 
 public class ConversationsFragment extends Fragment {
     private FirebaseListAdapter<Conversation> adapter;
@@ -121,6 +129,24 @@ public class ConversationsFragment extends Fragment {
             protected void populateView(View v, Conversation model, int position) {
                 TextView convTitre          = (TextView)v.findViewById(R.id.conversation_titre);
                 TextView convDescription    = (TextView)v.findViewById(R.id.conversation_description);
+                ImageView miniature         = (ImageView)v.findViewById(R.id.miniature);
+
+                StorageReference imageRef = MainActivity.STORAGE.getReference().child(model.getMiniature());
+                final Bitmap[] img = new Bitmap[1];
+                final long ONE_MEGABYTE = 1024 * 1024;
+                imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        img[0] = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        miniature.setImageBitmap(img[0]);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e("error", "error dl Image");
+                    }
+                });
+
 
                 convTitre.setText(model.getNomAnnonce());
                 convDescription.setText(model.getId());
