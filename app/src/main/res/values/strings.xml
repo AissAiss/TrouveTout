@@ -13,4 +13,5 @@
     <string name="txt_pictures">Photos :</string>
     <string name="txt_title">Titre :</string>
     <string name="txt_my_annonce">Mon annonce</string>
+    <string name="txt_my_annonces">Mes annonces :</string>
 </resources>

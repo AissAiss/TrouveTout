@@ -23,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trouvetout.Fragment.ConversationsFragment;
@@ -62,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayoutHome;
     private LinearLayout linearLayoutMessage;
     private LinearLayout linearLayoutShop;
+
+    private TextView textView_home;
+    private TextView textView_fav;
+    private TextView textView_message;
+    private TextView textView_shop;
+
+
     private ImageButton button_User;
     private ImageButton[] navBarButton;
 
@@ -88,7 +96,10 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutShop     = findViewById(R.id.shopLayout);
         button_User          = findViewById(R.id.btnUser);
 
-
+        textView_home = findViewById(R.id.textHome);
+        textView_fav = findViewById(R.id.textFav);
+        textView_message = findViewById(R.id.textMessage);
+        textView_shop = findViewById(R.id.textShop);
 
         linearLayoutHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,10 +224,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeIconFromNavBar(String icon){
-        findViewById(R.id.textHome).setVisibility(View.INVISIBLE);
-        findViewById(R.id.textFav).setVisibility(View.INVISIBLE);
-        findViewById(R.id.textMessage).setVisibility(View.INVISIBLE);
-        findViewById(R.id.textShop).setVisibility(View.INVISIBLE);
+        textView_home.setVisibility(View.INVISIBLE);
+        textView_fav.setVisibility(View.INVISIBLE);
+        textView_message.setVisibility(View.INVISIBLE);
+        textView_shop.setVisibility(View.INVISIBLE);
 
         findViewById(R.id.homeLayout).setBackground(null);
         findViewById(R.id.favLayout).setBackground(null);
@@ -228,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             case "home":
                 removeIcon();
                 findViewById(R.id.btnHome).setBackgroundResource(R.drawable.ic_home_2_fill);
-                findViewById(R.id.textHome).setVisibility(View.VISIBLE);
+                textView_home.setVisibility(View.VISIBLE);
                 findViewById(R.id.homeLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutHome.startAnimation(animation1);
@@ -237,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
             case "fav":
                 removeIcon();
                 findViewById(R.id.btnFav).setBackgroundResource(R.drawable.ic_heart_fill);
-                findViewById(R.id.textFav).setVisibility(View.VISIBLE);
+                textView_fav.setVisibility(View.VISIBLE);
                 findViewById(R.id.favLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutFav.startAnimation(animation2);
@@ -245,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
             case "message":
                 removeIcon();
                 findViewById(R.id.btnMessage).setBackgroundResource(R.drawable.ic_message_fill);
-                findViewById(R.id.textMessage).setVisibility(View.VISIBLE);
+                textView_message.setVisibility(View.VISIBLE);
                 findViewById(R.id.messageLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutMessage.startAnimation(animation3);
@@ -253,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
             case "shop":
                 removeIcon();
                 findViewById(R.id.btnShop).setBackgroundResource(R.drawable.ic_shopping_cart_fill);
-                findViewById(R.id.textShop).setVisibility(View.VISIBLE);
+                textView_shop.setVisibility(View.VISIBLE);
                 findViewById(R.id.shopLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutShop.startAnimation(animation4);
