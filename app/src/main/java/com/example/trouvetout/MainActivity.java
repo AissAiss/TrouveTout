@@ -277,4 +277,9 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setImageResource(R.drawable.ic_profile);
 
     }
+
+    @Override
+    public void onBackPressed(){
+
+    }
 }

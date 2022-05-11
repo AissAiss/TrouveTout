@@ -3,8 +3,10 @@ package com.example.trouvetout.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,7 +163,10 @@ public class MessageFragment extends Fragment {
         listOfMessages.setAdapter(adapter);
     }
 
-    @Override public void onStart() {
+
+
+    @Override
+    public void onStart() {
         super.onStart();
         if (adapter != null) {
             adapter.startListening();
@@ -170,7 +175,8 @@ public class MessageFragment extends Fragment {
 
     // Function to tell the app to stop getting
     // data from database on stopping of the activity
-    @Override public void onStop() {
+    @Override
+    public void onStop() {
         super.onStop();
         if (adapter != null) {
             adapter.stopListening();

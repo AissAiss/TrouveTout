@@ -2,6 +2,12 @@ package com.example.trouvetout.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -92,11 +98,9 @@ public class ConversationsFragment extends Fragment {
                 {
                     case R.id.radioButtonAchats:
                         displayConversation("idClient");
-
                         break;
                     case R.id.radioButtonVentes:
                         displayConversation("idOwner");
-
                         break;
                 }
                 //displayConversation();
@@ -108,9 +112,6 @@ public class ConversationsFragment extends Fragment {
     }
 
     private void displayConversation(String child){
-        //listOfConversations.setAdapter(null);
-
-        //Toast.makeText(getContext(), "Display " + child, Toast.LENGTH_SHORT).show();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -132,13 +133,13 @@ public class ConversationsFragment extends Fragment {
                 ImageView miniature         = (ImageView)v.findViewById(R.id.miniature);
 
                 StorageReference imageRef = MainActivity.STORAGE.getReference().child(model.getMiniature());
-                final Bitmap[] img = new Bitmap[1];
+                //final Bitmap[] img = new Bitmap[1];
                 final long ONE_MEGABYTE = 1024 * 1024;
                 imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
-                        img[0] = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        miniature.setImageBitmap(img[0]);
+                        //img[0] = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        miniature.setImageBitmap(getRoundedCornerBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length), 30));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -147,9 +148,13 @@ public class ConversationsFragment extends Fragment {
                     }
                 });
 
+                if(child == "idClient")
+                    convTitre.setText(model.getNomOwner());
+                else
+                    convTitre.setText(model.getNomClient());
 
-                convTitre.setText(model.getNomAnnonce());
-                convDescription.setText(model.getId());
+
+                convDescription.setText(model.getNomAnnonce());
 
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -166,6 +171,28 @@ public class ConversationsFragment extends Fragment {
 
         listOfConversations.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                .getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
     }
 
     @Override public void onStart() {

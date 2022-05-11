@@ -15,8 +15,10 @@
         <entry key="app/src/main/res/drawable/custom_ic_user.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.2359375" />
         <entry key="app/src/main/res/drawable/fav_button.xml" value="0.4041666666666667" />
+        <entry key="app/src/main/res/drawable/ic_add_picture.xml" value="0.307" />
         <entry key="app/src/main/res/drawable/ic_call.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/ic_call_fill.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/drawable/ic_focus.xml" value="0.307" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_heartFav.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_heart_fav.xml" value="0.4041666666666667" />
@@ -47,8 +49,8 @@
         <entry key="app/src/main/res/layout/activity_add_annonce.xml" value="0.22913861467144103" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.27509112141231007" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22507850807034346" />
-        <entry key="app/src/main/res/layout/conversation.xml" value="0.25729166666666664" />
-        <entry key="app/src/main/res/layout/details_car_fragment.xml" value="0.45131370601143206" />
+        <entry key="app/src/main/res/layout/conversation.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/details_car_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/details_house_fragment.xml" value="0.32518115942028986" />
         <entry key="app/src/main/res/layout/details_other_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_car_add_annonce.xml" value="0.487221480273968" />

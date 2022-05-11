@@ -6,4 +6,11 @@
     <string name="title_menu_shop">Panier</string>
     <string name="title_menu_favori">Favoris</string>
     <string name="title_menu_home">Home</string>
+    <string name="txt_mileage">Killométrage : </string>
+    <string name="txt_description">Déscription : </string>
+    <string name="btn_contact">Contacter</string>
+    <string name="btn_add">Ajouter</string>
+    <string name="txt_pictures">Photos :</string>
+    <string name="txt_title">Titre :</string>
+    <string name="txt_my_annonce">Mon annonce</string>
 </resources>

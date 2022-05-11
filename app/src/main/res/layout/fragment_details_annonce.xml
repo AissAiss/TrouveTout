@@ -51,9 +51,9 @@
                 android:id="@+id/btnContacter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/orange_trouve_tout"
-                android:text="Contacter"
-                android:textColor="@color/white" />
+                android:text="@string/btn_contact"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/orange_trouve_tout"/>
 
             <Space
                 android:layout_width="wrap_content"

@@ -281,7 +281,7 @@ public class AddAnnonceActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         UserPro userPro = task.getResult().getValue(UserPro.class);
-                        if (userPro.getNumCard() == null){
+                        if (userPro/*.getNumCard()*/ == null){
                             findViewById(R.id.image3).setVisibility(View.INVISIBLE);
                             findViewById(R.id.image4).setVisibility(View.INVISIBLE);
                         }
