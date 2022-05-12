@@ -224,10 +224,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeIconFromNavBar(String icon){
-        textView_home.setVisibility(View.INVISIBLE);
-        textView_fav.setVisibility(View.INVISIBLE);
-        textView_message.setVisibility(View.INVISIBLE);
-        textView_shop.setVisibility(View.INVISIBLE);
+        //textView_home.setVisibility(View.INVISIBLE);
+        //textView_fav.setVisibility(View.INVISIBLE);
+        //textView_message.setVisibility(View.INVISIBLE);
+        //textView_shop.setVisibility(View.INVISIBLE);
+
+        textView_home.setText("");
+        textView_fav.setText("");
+        textView_message.setText("");
+        textView_shop.setText("");
 
         findViewById(R.id.homeLayout).setBackground(null);
         findViewById(R.id.favLayout).setBackground(null);
@@ -239,7 +244,8 @@ public class MainActivity extends AppCompatActivity {
             case "home":
                 removeIcon();
                 findViewById(R.id.btnHome).setBackgroundResource(R.drawable.ic_home_2_fill);
-                textView_home.setVisibility(View.VISIBLE);
+                //textView_home.setVisibility(View.VISIBLE);
+                textView_home.setText(getResources().getString(R.string.title_menu_home));
                 findViewById(R.id.homeLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutHome.startAnimation(animation1);
@@ -248,7 +254,8 @@ public class MainActivity extends AppCompatActivity {
             case "fav":
                 removeIcon();
                 findViewById(R.id.btnFav).setBackgroundResource(R.drawable.ic_heart_fill);
-                textView_fav.setVisibility(View.VISIBLE);
+                //textView_fav.setVisibility(View.VISIBLE);
+                textView_fav.setText(getResources().getString(R.string.title_menu_favori));
                 findViewById(R.id.favLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutFav.startAnimation(animation2);
@@ -256,7 +263,8 @@ public class MainActivity extends AppCompatActivity {
             case "message":
                 removeIcon();
                 findViewById(R.id.btnMessage).setBackgroundResource(R.drawable.ic_message_fill);
-                textView_message.setVisibility(View.VISIBLE);
+                //textView_message.setVisibility(View.VISIBLE);
+                textView_message.setText(getResources().getString(R.string.title_menu_message));
                 findViewById(R.id.messageLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutMessage.startAnimation(animation3);
@@ -264,7 +272,8 @@ public class MainActivity extends AppCompatActivity {
             case "shop":
                 removeIcon();
                 findViewById(R.id.btnShop).setBackgroundResource(R.drawable.ic_shopping_cart_fill);
-                textView_shop.setVisibility(View.VISIBLE);
+                //textView_shop.setVisibility(View.VISIBLE);
+                textView_shop.setText(getResources().getString(R.string.title_menu_shop));
                 findViewById(R.id.shopLayout).setBackground(ContextCompat.getDrawable(this,R.drawable.icon_background));
                 Animation animation4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_spawn);
                 linearLayoutShop.startAnimation(animation4);

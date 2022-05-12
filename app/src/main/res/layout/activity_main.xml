@@ -89,9 +89,8 @@
                 android:clickable="false"
                 android:paddingStart="5dp"
                 android:singleLine="true"
-                android:text="@string/title_menu_home"
                 android:textColor="@color/bleuFonce"
-                android:visibility="invisible" />
+                android:visibility="visible" />
         </LinearLayout>
 
         <Space
@@ -122,9 +121,8 @@
                 android:clickable="false"
                 android:paddingStart="5dp"
                 android:singleLine="true"
-                android:text="@string/title_menu_favori"
                 android:textColor="@color/bleuFonce"
-                android:visibility="invisible" />
+                android:visibility="visible" />
         </LinearLayout>
 
 
@@ -157,9 +155,8 @@
                 android:clickable="false"
                 android:paddingStart="5dp"
                 android:singleLine="true"
-                android:text="@string/title_menu_message"
                 android:textColor="@color/bleuFonce"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -191,9 +188,8 @@
                 android:clickable="false"
                 android:paddingStart="5dp"
                 android:singleLine="true"
-                android:text="@string/title_menu_shop"
                 android:textColor="@color/bleuFonce"
-                android:visibility="invisible" />
+                android:visibility="visible" />
         </LinearLayout>
 
         <Space
