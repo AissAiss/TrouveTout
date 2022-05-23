@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +33,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -52,6 +57,7 @@ public class DetailsAnnonceFragment extends Fragment {
     private String id;
     private Annonce annonce;
     private Button btnConctacter;
+    private Fragment fragment_Message;
 
     public DetailsAnnonceFragment() {
         // Required empty public constructor
@@ -78,7 +84,7 @@ public class DetailsAnnonceFragment extends Fragment {
         if (getArguments() != null) {
             id = getArguments().getString(ARG_ID);
         }
-
+        fragment_Message = new MessageFragment();
 
 
     }
@@ -102,24 +108,45 @@ public class DetailsAnnonceFragment extends Fragment {
                 String nomAnnonce   = annonce.getNom();
                 String miniature    = annonce.getPhoto().get(0);
 
-                String id           = idAnnonce + idOwner + idClient;
+                String id_annonces  = idAnnonce + idOwner + idClient;
 
-                FirebaseDatabase.getInstance()
-                        .getReference("Conversations")
-                        .push()
-                        .setValue(new Conversation(
-                                id,
-                                idAnnonce,
-                                idOwner,
-                                idClient,
-                                nomAnnonce,
-                                nomOwner,
-                                nomClient,
-                                miniature)
-                        );
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                Query query = rootRef.child("Conversations").orderByChild("id").equalTo(id_annonces);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(!snapshot.exists()) {
+                            //Toast.makeText(getContext(), "Créer la conversation", Toast.LENGTH_LONG).show();
 
+                            FirebaseDatabase.getInstance()
+                                    .getReference("Conversations")
+                                    .push()
+                                    .setValue(new Conversation(
+                                            id_annonces,
+                                            idAnnonce,
+                                            idOwner,
+                                            idClient,
+                                            nomAnnonce,
+                                            nomOwner,
+                                            nomClient,
+                                            miniature)
+                                    );
+                        }
+                        else {
+                            //Toast.makeText(getContext(), "La conversation existe déjà", Toast.LENGTH_LONG).show();
+                        }
 
+                        ConversationsFragment.ID_CURRENT_CONVERSATION = id_annonces;
+                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, fragment_Message);
+                        ft.commit();
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 

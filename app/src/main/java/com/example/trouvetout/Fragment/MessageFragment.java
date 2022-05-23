@@ -2,15 +2,18 @@ package com.example.trouvetout.Fragment;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -146,15 +149,19 @@ public class MessageFragment extends Fragment {
                 // Get references to the views of message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
+
+                //TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
                 // Set their text
                 messageText.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());
 
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMessageTime()));
+                if( FirebaseAuth.getInstance().getCurrentUser().getDisplayName().equals(model.getMessageUser())) {
+                    LinearLayout layout_message = (LinearLayout) v.findViewById(R.id.layout_message);
+                    LinearLayout layout_text = (LinearLayout) v.findViewById(R.id.layout_text);
+                    layout_message.setGravity(Gravity.RIGHT);
+                    layout_text.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.message_bg_2));
+                }
             }
         };
 
