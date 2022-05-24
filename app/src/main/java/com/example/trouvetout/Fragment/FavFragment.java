@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.trouvetout.R;
 import com.example.trouvetout.adapter.AnnoncesAdapter;
@@ -58,7 +59,13 @@ public class FavFragment extends Fragment{
         rv = view.findViewById(R.id.rv_fav);
 
 
-        setupRecyclerView();
+        if(user == null){
+            Toast.makeText(view.getContext(), "Vous devez être connecté pour accéder à vos favoris", Toast.LENGTH_SHORT).show();
+        }else{
+            setupRecyclerView();
+        }
+
+
 
 
         // Inflate the layout for this fragment

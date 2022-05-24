@@ -7,9 +7,12 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir"
         android:text="Prix du loyer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +22,6 @@
         android:id="@+id/editTextLoyer"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:gravity="start|top"
@@ -28,11 +30,14 @@
         app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenir"
         android:text="Description"
         app:layout_constraintStart_toStartOf="@+id/editTextDescription"
         app:layout_constraintTop_toBottomOf="@+id/editTextCaution" />
@@ -41,7 +46,6 @@
         android:id="@+id/editTextDescription"
         android:layout_width="270dp"
         android:layout_height="166dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:gravity="start|top"
@@ -53,9 +57,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir"
         android:text="Surface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLoyer" />
@@ -64,7 +71,6 @@
         android:id="@+id/editTextSurface"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:gravity="start|top"
@@ -75,11 +81,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Caution
-"
+        android:fontFamily="@font/avenir"
+        android:text="Caution"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSurface" />
 
@@ -87,7 +95,6 @@
         android:id="@+id/editTextCaution"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:gravity="start|top"
