@@ -112,7 +112,7 @@
                 android:drawablePadding="12dp"
                 android:fontFamily="@font/avenir"
                 android:hint="Numero de téléphone"
-                android:inputType="textPassword"
+                android:inputType="phone"
                 android:paddingStart="12dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
