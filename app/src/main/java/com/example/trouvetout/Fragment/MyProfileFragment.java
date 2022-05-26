@@ -103,7 +103,7 @@ public class MyProfileFragment extends Fragment {
         FirebaseRecyclerOptions<Annonce> options = new FirebaseRecyclerOptions.Builder<Annonce>()
                 .setQuery(query, Annonce.class)
                 .build();
-        adapter = new MesAnnoncesAdapter(options);
+        adapter = new MesAnnoncesAdapter(options, this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
