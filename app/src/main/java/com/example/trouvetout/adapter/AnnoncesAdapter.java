@@ -59,8 +59,7 @@ public class AnnoncesAdapter extends FirebaseRecyclerAdapter<Annonce, AnnonceVie
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         List<Address> addresses =null;
         try {
-             addresses = geocoder.getFromLocation(model.getLattitude(),  model.getLongitude(),  1);
-
+             addresses = geocoder.getFromLocation(model.getLattitude(),model.getLongitude(), 1);
         } catch (IOException e) {
             e.printStackTrace();
         }

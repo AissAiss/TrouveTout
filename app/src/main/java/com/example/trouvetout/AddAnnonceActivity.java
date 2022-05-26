@@ -10,7 +10,9 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,6 +22,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,11 +51,14 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class AddAnnonceActivity extends AppCompatActivity {
+    private static final int REQUEST_LOCATION = 1;
+
 
     private static int RESULT_LOAD_IMAGE = 1;
     Activity activity;
     ImageView imageViewSelected;
     ArrayList<String> photos;
+    LocationManager lm;
     String id;
     String category;
     double longitude;
@@ -185,22 +191,19 @@ public class AddAnnonceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String key;
+                lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                // TODO : Régler cette merde de localisation de mort
-                //LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                //Location location = null;
 
-                try {
-                    //location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                } catch (SecurityException e) {
-                    Toast.makeText(view.getContext(), "erreur, pas d'autorisation pour le GPS", Toast.LENGTH_LONG).show();
-                    activity.finish();
-                }
+
+
 
                 if(id == null) {
                     key = MainActivity.MDATABASE.getDatabase().getReference("Annonces").push().getKey();
-                    longitude = 43.6036036036036; //location.getLongitude();
-                    lattitude = 3.8816465074753554; // location.getLatitude();
+                    if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        OnGPS();
+                    } else {
+                        getLocation();
+                    }
 
                 }else {
                     key = id;
@@ -356,6 +359,40 @@ public class AddAnnonceActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         frameLayout.addView(inflater.inflate(fragment, null));
 
+    }
+    private void OnGPS() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new  DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGPS = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
+                double lat = locationGPS.getLatitude();
+                double longi = locationGPS.getLongitude();
+                lattitude = lat;
+                longitude = longi;
+            } else {
+                Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 

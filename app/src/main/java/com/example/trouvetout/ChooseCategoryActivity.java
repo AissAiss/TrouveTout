@@ -25,6 +25,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
                     intent.putExtra("Category","Other");
                 }
                 startActivity(intent);
+                finish();
             }
         });
     }

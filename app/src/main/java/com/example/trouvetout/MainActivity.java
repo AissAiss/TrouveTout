@@ -101,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         textView_message = findViewById(R.id.textMessage);
         textView_shop = findViewById(R.id.textShop);
 
+
+        changeIconFromNavBar("home");
+        replaceCurrentFragmentBy(fragment_Home);
+
         linearLayoutHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
         }else {
+
+
 
         }
 
